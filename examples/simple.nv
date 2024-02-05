@@ -1,0 +1,215 @@
+use std.env;
+use std.io;
+use std.json;
+use std.net.http.{self, Headers, Request};
+
+// This is a User struct
+struct User {
+    name: string,
+    id: int?,
+    email: string?,
+    profile: Profile?
+}
+
+type FooInt = int;
+pub type FooFloat = float;
+
+enum StatusCode {
+    Ok = 200,
+    BadRequest = 400,
+    NotFound = 404,
+}
+pub enum OpType {
+    Create = 1,
+    Update = 2,
+    Delete = 3,
+}
+
+pub struct Profile {
+    bio: string?,
+    privacy: bool
+}
+
+/// special comment
+
+let data = try! json.parse::<User>(`{
+    "optype": 2,
+    "id": 1,
+    "name": "Jason Lee",
+    "email": "huacnlee@gmail.com",
+        "profile": {
+        "bio": "I love Rust!", // I really do
+        "privacy": false
+        tags: ["foo", "bar"]
+    },
+    "items": [1, 2, 3, 4, 5]
+}`);
+
+fn querystring(obj: value.Value): string {
+    let queries = [string] {};
+    let items = obj.object()!;
+    for (let k, v in items) {
+        queries.push(`${k}=${v}`);
+    }
+    return queries.join("&");
+}
+
+pub fn send_request(path: string, payload: value.Value): value.Value? {
+    let headers = Headers.new();
+    headers.set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+
+    let req = Request.new(
+        method: "POST",
+        url: `${ENDPOINT}${path}`,
+        headers: headers,
+        body: querystring(payload).bytes()
+    );
+
+    let res = req.send();
+
+    if (res.status() != 200) {
+        io.println(`请求失败，状态码：${res.status()}, text: ${res.text()}`);
+        return nil;
+    } else {
+        return res.json::<User>(); // json is a `User`
+    }
+}
+
+#[
+// for Serialize
+serde(
+    // rename to LOW
+    rename = "LOW",
+    // ignore this
+    skip
+)]
+struct Log {
+    car_code: string,
+    #[
+    // for Serialize
+    serde(
+        // rename to LOW
+        rename = "LOW",
+        // ignore this
+        skip
+    )]
+    day: string,
+    status: string,
+}
+
+fn get_orders(): string {
+    let logs = [Log] {};
+    for (let log in logs) {
+        let car_code = log.car_code;
+        let day = log.day;
+        let status = log.status;
+        msgs.push(`中文: ${car_code}, 日期: ${day}`);
+        if (msgs.len() > 5) {
+            break;
+        }
+    }
+
+    return msgs.join("\n");
+}
+
+fn foo_bar(day: string, card_code: string, tel: string, retry: bool): string {
+    if (op_status == 1) {
+        msg = `[处理成功] 中文: ${card_code}, 日期: ${day}\n\n${data}`;
+    } else {
+        if (is_loged == true) {
+            msg = `[中文测试] 中文: ${card_code} 已经有处理了, 日期: ${day}\n\n${data}`;
+        } else {
+            msg = `[处理失败] 中文: ${card_code}, 日期: ${day}\n\n${data}`;
+            // 重试 again
+            if (retry) {
+                io.println(`RETRY AGAIN\n---------------------\n${msg}`);
+                return foo_bar(day, card_code, tel, retry: false);
+            }
+        }
+    }
+
+    return msg;
+}
+
+fn main() {
+    // create a user
+    let user = User {
+        // with profile
+        profile: Profile { bio: "I love Rust!", privacy: false },
+        name: "Jason Lee",
+        id: 101,
+        email: "huacnlee@gmail.com"
+    };
+
+    let items = [int] { 1, 3, 4 };
+    let items = [string] { "foo", "bar", "dar" };
+    let items = <string, string> { "foo": "bar", "hello": "world" };
+
+    if (items.len() >= 2) {
+        io.println("items is more than 2");
+    } else if (items.len() == 0) {
+        items.sort();
+    } else {
+        io.println("items is less than 2");
+    }
+
+    io.println(`Hello, ${user.name}`);
+
+    for (let candlestick in candlesticks) {
+        t.execute(time: candlestick.time, close: candlestick.close);
+
+        for (let candlestick in candlesticks) {
+            t.execute(time: candlestick.time, close: candlestick.close);
+        }
+    }
+}
+
+struct T {
+    a: int,
+    b: T2,
+    c: T2?,
+}
+struct T2 {
+    d: int,
+    e: string?,
+}
+
+test "foo" {
+    test_harness.callback(10, 20, |n| {
+        assert_eq n, -10;
+    });
+    assert_eq test_harness.callback2(10, 20, |a, b| {
+        return a - b;
+    }), -10;
+
+    let items = [int] { 1, 3, 4 };
+    let items = [string] { "foo", "bar", "dar" };
+    let items = <string, string> { "foo": "bar", "hello": "world" };
+
+    let a = "hello";
+    if (a.len() == 5) {
+        io.println("a is 5");
+    } else {
+        io.println("a is not 5");
+    }
+}
+
+//  struct User {
+//      email: string,
+//      admin: bool,
+//      profile: Profile?
+//  }
+//
+//  bench "float" {
+//   bench.run(|| {
+//     rand.float(0.0, 0.99);
+//   });
+//  }
+
+let a = <int, string> { 1: "a", 2: "B", 3: "C" };
+
+// let b = <int, string> {
+//     4: "d",
+//     5: "e",
+//     6: "f",
+// };
