@@ -15,6 +15,8 @@ fn foo(): string {
     return "hello;
 }
 
+fn foo<T>(x: T?): string? {}
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -43,105 +45,45 @@ fn foo(): string {
     parameters: (parameters
       (parameter
         pattern: (identifier)
-        type: (reference_type
-          type: (primitive_type))))
-    body: (block
-      (expression_statement
-        (macro_invocation
-          macro: (identifier)
-          (token_tree
-            (string_literal)
-            (identifier))))))
-  (function_item
-    name: (identifier)
-    parameters: (parameters)
-    return_type: (array_type
-      element: (primitive_type)
-      length: (integer_literal))
-    body: (block
-      (expression_statement
-        (return_expression
-          (array_expression
-            (integer_literal)
-            (integer_literal))))))
-  (function_item
-    name: (identifier)
-    parameters: (parameters)
-    return_type: (tuple_type
-      (primitive_type)
-      (primitive_type))
-    body: (block
-      (expression_statement
-        (return_expression
-          (tuple_expression
-            (integer_literal)
-            (integer_literal))))))
-  (function_item
-    name: (identifier)
-    parameters: (parameters)
-    body: (block
-      (return_expression)))
-  (function_item
-    name: (identifier)
-    parameters: (parameters
-      (parameter
-        pattern: (identifier)
-        type: (abstract_type
-          trait: (function_type
-            trait: (type_identifier)
-            parameters: (parameters)
-            return_type: (generic_type
-              type: (scoped_type_identifier
-                path: (identifier)
-                name: (type_identifier))
-              type_arguments: (type_arguments
-                (type_identifier)
-                (type_identifier)))))))
-    body: (block))
-  (function_item
-    name: (identifier)
-    parameters: (parameters
-      (attribute_item
-        (attribute
-          (identifier)))
-      (parameter
-        pattern: (identifier)
-        type: (primitive_type))
-      (attribute_item
-        (attribute
-          (identifier)))
-      (parameter
-        pattern: (identifier)
         type: (primitive_type)))
     body: (block))
   (function_item
     name: (identifier)
-    parameters: (parameters
-      (self_parameter
-        (self)))
-    return_type: (generic_type
-      type: (type_identifier)
-      type_arguments: (type_arguments
-        (block
-          (scoped_identifier
-            path: (identifier)
-            name: (identifier)))))
-    body: (block))
+    parameters: (parameters)
+    return_type: (primitive_type)
+    body: (block
+      (expression_statement
+        (return_expression
+          (ERROR)
+          (identifier)))))
   (function_item
     name: (identifier)
+    type_parameters: (type_parameters
+      (type_identifier))
     parameters: (parameters
       (parameter
         pattern: (identifier)
-        type: (abstract_type
-          (type_parameters
-            (lifetime
-              (identifier)))
-          trait: (generic_type
-            type: (type_identifier)
-            type_arguments: (type_arguments
-              (generic_type
-                type: (type_identifier)
-                type_arguments: (type_arguments
-                  (lifetime
-                    (identifier)))))))))
+        type: (type_identifier))
+      (ERROR))
+    return_type: (primitive_type)
+    (ERROR)
     body: (block)))
+
+================================================================================
+Variable declarations
+================================================================================
+
+let x: int = 5;
+const API_HOST: string = "https://api.example.com";
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_declaration
+    (identifier)
+    (primitive_type)
+    (integer_literal))
+  (const_item
+    (identifier)
+    (primitive_type)
+    (string_literal)))

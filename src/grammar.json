@@ -160,6 +160,10 @@
               },
               {
                 "type": "STRING",
+                "value": "decimal"
+              },
+              {
+                "type": "STRING",
                 "value": "bool"
               },
               {
@@ -418,6 +422,10 @@
         {
           "type": "STRING",
           "value": "test"
+        },
+        {
+          "type": "STRING",
+          "value": "throw"
         },
         {
           "type": "STRING",
@@ -1585,6 +1593,10 @@
                     },
                     {
                       "type": "STRING",
+                      "value": "decimal"
+                    },
+                    {
+                      "type": "STRING",
                       "value": "bool"
                     },
                     {
@@ -2691,6 +2703,10 @@
               },
               {
                 "type": "STRING",
+                "value": "decimal"
+              },
+              {
+                "type": "STRING",
                 "value": "bool"
               },
               {
@@ -3586,6 +3602,10 @@
               {
                 "type": "STRING",
                 "value": "float"
+              },
+              {
+                "type": "STRING",
+                "value": "decimal"
               },
               {
                 "type": "STRING",
@@ -6292,6 +6312,10 @@
               },
               {
                 "type": "STRING",
+                "value": "decimal"
+              },
+              {
+                "type": "STRING",
                 "value": "bool"
               },
               {
@@ -7029,6 +7053,10 @@
                   {
                     "type": "STRING",
                     "value": "float"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "decimal"
                   }
                 ]
               },
@@ -7265,6 +7293,10 @@
               },
               {
                 "type": "STRING",
+                "value": "decimal"
+              },
+              {
+                "type": "STRING",
                 "value": "bool"
               },
               {
@@ -7360,7 +7392,7 @@
     },
     "metavariable": {
       "type": "PATTERN",
-      "value": "\\$[a-zA-Z_]\\w*"
+      "value": "\\$[a-zA-Z_]\\w*[\\?]?"
     }
   },
   "extras": [

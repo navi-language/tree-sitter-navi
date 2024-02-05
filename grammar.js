@@ -24,7 +24,7 @@ const PREC = {
   closure: -1,
 };
 
-const numeric_types = ["int", "float"];
+const numeric_types = ["int", "float", "decimal"];
 
 const TOKEN_TREE_NON_SPECIAL_TOKENS = [
   "/",
@@ -176,6 +176,7 @@ module.exports = grammar({
         "struct",
         "switch",
         "test",
+        "throw",
         "throws",
         "try",
         "type",
@@ -1363,7 +1364,7 @@ module.exports = grammar({
     super: (_) => "super",
     crate: (_) => "crate",
 
-    metavariable: (_) => /\$[a-zA-Z_]\w*/,
+    metavariable: (_) => /\$[a-zA-Z_]\w*[\?]?/,
   },
 });
 

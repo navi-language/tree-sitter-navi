@@ -4554,6 +4554,10 @@
     "named": false
   },
   {
+    "type": "throw",
+    "named": false
+  },
+  {
     "type": "throws",
     "named": false
   },

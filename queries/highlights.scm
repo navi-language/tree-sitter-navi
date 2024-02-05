@@ -52,10 +52,6 @@
   function: (field_expression
     field: (field_identifier) @function.method))
 
-(macro_invocation
-  macro: (identifier) @function.macro
-  "!" @function.macro)
-
 ; Function definitions
 
 (function_item (identifier) @function)

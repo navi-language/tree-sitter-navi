@@ -11,8 +11,7 @@
   "author": "Jason Lee <huacnlee@gmail.com>",
   "type": "commonjs",
   "devDependencies": {
-    "@types/bun": "latest",
-    "node-gyp": "^10.0.1",
+    "node-gyp": ">=7 <11",
     "tree-sitter-cli": "^0.20.8"
   },
   "dependencies": {
@@ -33,7 +32,6 @@
       "injection-regex": "navi",
       "file-types": ["nv"],
       "highlights": ["queries/highlights.scm"],
-      "injections": ["queries/injections.scm"],
       "tags": ["queries/tags.scm"]
     }
   ]
