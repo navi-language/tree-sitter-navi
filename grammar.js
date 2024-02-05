@@ -1,3 +1,9 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const PREC = {
   call: 15,
   field: 14,
@@ -96,7 +102,7 @@ module.exports = grammar({
   word: ($) => $.identifier,
 
   rules: {
-    source_file: ($) => seq(optional($.shebang), repeat($._statement)),
+    source_file: ($) => seq(repeat($._statement)),
 
     _statement: ($) => choice($.expression_statement, $._declaration_statement),
 
@@ -1331,6 +1337,8 @@ module.exports = grammar({
 
     line_comment: (_) => token(seq("//", /.*/)),
 
+    block_comment: (_) => token(seq("///", /.*/)),
+
     _path: ($) =>
       choice(
         $.self,
@@ -1344,8 +1352,6 @@ module.exports = grammar({
       ),
 
     identifier: (_) => /(r#)?[_\p{XID_Start}][_\p{XID_Continue}]*/,
-
-    shebang: (_) => /#![\s]*[^\[\s]+/,
 
     _reserved_identifier: ($) =>
       alias(choice("default", "union"), $.identifier),

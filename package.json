@@ -1,10 +1,12 @@
 {
   "name": "tree-sitter-navi",
   "description": "Navi grammar for tree-sitter",
+  "main": "bindings/node",
   "repository": {
     "type": "git",
     "url": "https://github.com/navi-language/tree-sitter-navi.git"
   },
+  "license": "MIT",
   "keywords": ["parser", "navi"],
   "author": "Jason Lee <huacnlee@gmail.com>",
   "type": "commonjs",
@@ -13,29 +15,26 @@
     "node-gyp": "^10.0.1",
     "tree-sitter-cli": "^0.20.8"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
   "dependencies": {
-    "nan": "^2.18.0"
+    "nan": "^2.17.0"
   },
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
     "build-wasm": "tree-sitter build-wasm",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
-    "test": "script/parse-examples",
+    "test": "tree-sitter test && script/parse-examples",
+    "test-windows": "tree-sitter test",
     "dev": "tree-sitter highlight --html examples/simple.nv > target/out.html && open target/out.html"
   },
   "tree-sitter": [
     {
       "scope": "source.navi",
       "injection-regex": "navi",
-      "file-types": ["nv", "navi"],
+      "file-types": ["nv"],
       "highlights": ["queries/highlights.scm"],
       "injections": ["queries/injections.scm"],
       "tags": ["queries/tags.scm"]
     }
-  ],
-  "main": "bindings/node"
+  ]
 }

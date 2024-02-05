@@ -3247,10 +3247,6 @@
         {
           "type": "expression_statement",
           "named": true
-        },
-        {
-          "type": "shebang",
-          "named": true
         }
       ]
     }
@@ -4527,10 +4523,6 @@
   },
   {
     "type": "self",
-    "named": true
-  },
-  {
-    "type": "shebang",
     "named": true
   },
   {

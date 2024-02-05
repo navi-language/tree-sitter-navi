@@ -1,0 +1,147 @@
+================================================================================
+Function declarations
+================================================================================
+
+fn main() {}
+
+fn add(x: int, y: int): int {
+    return x + y;
+}
+
+fn takes_slice(slice: string) {
+}
+
+fn foo(): string {
+    return "hello;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_item
+    name: (identifier)
+    parameters: (parameters)
+    body: (block))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        pattern: (identifier)
+        type: (primitive_type))
+      (parameter
+        pattern: (identifier)
+        type: (primitive_type)))
+    return_type: (primitive_type)
+    body: (block
+      (expression_statement
+        (return_expression
+          (binary_expression
+            left: (identifier)
+            right: (identifier))))))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        pattern: (identifier)
+        type: (reference_type
+          type: (primitive_type))))
+    body: (block
+      (expression_statement
+        (macro_invocation
+          macro: (identifier)
+          (token_tree
+            (string_literal)
+            (identifier))))))
+  (function_item
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (array_type
+      element: (primitive_type)
+      length: (integer_literal))
+    body: (block
+      (expression_statement
+        (return_expression
+          (array_expression
+            (integer_literal)
+            (integer_literal))))))
+  (function_item
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (tuple_type
+      (primitive_type)
+      (primitive_type))
+    body: (block
+      (expression_statement
+        (return_expression
+          (tuple_expression
+            (integer_literal)
+            (integer_literal))))))
+  (function_item
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (return_expression)))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        pattern: (identifier)
+        type: (abstract_type
+          trait: (function_type
+            trait: (type_identifier)
+            parameters: (parameters)
+            return_type: (generic_type
+              type: (scoped_type_identifier
+                path: (identifier)
+                name: (type_identifier))
+              type_arguments: (type_arguments
+                (type_identifier)
+                (type_identifier)))))))
+    body: (block))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (attribute_item
+        (attribute
+          (identifier)))
+      (parameter
+        pattern: (identifier)
+        type: (primitive_type))
+      (attribute_item
+        (attribute
+          (identifier)))
+      (parameter
+        pattern: (identifier)
+        type: (primitive_type)))
+    body: (block))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (self_parameter
+        (self)))
+    return_type: (generic_type
+      type: (type_identifier)
+      type_arguments: (type_arguments
+        (block
+          (scoped_identifier
+            path: (identifier)
+            name: (identifier)))))
+    body: (block))
+  (function_item
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        pattern: (identifier)
+        type: (abstract_type
+          (type_parameters
+            (lifetime
+              (identifier)))
+          trait: (generic_type
+            type: (type_identifier)
+            type_arguments: (type_arguments
+              (generic_type
+                type: (type_identifier)
+                type_arguments: (type_arguments
+                  (lifetime
+                    (identifier)))))))))
+    body: (block)))
