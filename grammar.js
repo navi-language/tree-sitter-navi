@@ -97,6 +97,8 @@ module.exports = grammar({
     [$.parameters, $.tuple_struct_pattern],
     [$.type_parameters, $.for_lifetimes],
     [$.array_expression],
+    [$.scoped_identifier, $._expression_except_range],
+    [$._type, $.scoped_identifier],
   ],
 
   word: ($) => $.identifier,
@@ -540,15 +542,16 @@ module.exports = grammar({
         $.pointer_type,
         $.generic_type,
         $.scoped_type_identifier,
-        $.tuple_type,
-        $.unit_type,
+        // $.tuple_type,
+        // $.unit_type,
         $.array_type,
+        $.map_type,
         $.function_type,
         $._type_identifier,
         // $.macro_invocation,
-        $.empty_type,
-        $.dynamic_type,
-        $.bounded_type,
+        // $.empty_type,
+        // $.dynamic_type,
+        // $.bounded_type,
         alias(choice(...primitive_types), $.primitive_type),
       ),
 
@@ -559,13 +562,10 @@ module.exports = grammar({
 
     lifetime: ($) => seq("'", $.identifier),
 
-    array_type: ($) =>
-      seq(
-        "[",
-        field("element", $._type),
-        optional(seq(";", field("length", $._expression))),
-        "]",
-      ),
+    array_type: ($) => seq("[", field("element", $._type), "]"),
+
+    map_type: ($) =>
+      seq("<", field("key", $._type), ",", field("value", $._type), "]"),
 
     for_lifetimes: ($) =>
       seq("for", "<", sepBy1(",", $.lifetime), optional(","), ">"),
@@ -790,7 +790,7 @@ module.exports = grammar({
             ),
           ),
         ),
-        "::",
+        ".",
         field("name", choice($.identifier, $.super)),
       ),
 
@@ -830,15 +830,7 @@ module.exports = grammar({
       ),
 
     range_expression: ($) =>
-      prec.left(
-        PREC.range,
-        choice(
-          seq($._expression, choice("..", "...", "..="), $._expression),
-          seq($._expression, ".."),
-          seq("..", $._expression),
-          "..",
-        ),
-      ),
+      prec.left(PREC.range, choice(seq("..", $._expression), "..")),
 
     unary_expression: ($) =>
       prec(PREC.unary, seq(choice("-", "*", "!"), $._expression)),
@@ -1221,8 +1213,8 @@ module.exports = grammar({
 
     field_pattern: ($) =>
       seq(
-        optional("ref"),
-        optional($.mutable_specifier),
+        // optional("ref"),
+        // optional($.mutable_specifier),
         choice(
           field("name", alias($.identifier, $.shorthand_field_identifier)),
           seq(
@@ -1364,7 +1356,7 @@ module.exports = grammar({
     super: (_) => "super",
     crate: (_) => "crate",
 
-    metavariable: (_) => /\$[a-zA-Z_]\w*[\?]?/,
+    metavariable: (_) => /\$[a-zA-Z_]\w*/,
   },
 });
 

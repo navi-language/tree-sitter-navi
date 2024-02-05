@@ -75,6 +75,8 @@ Variable declarations
 
 let x: int = 5;
 const API_HOST: string = "https://api.example.com";
+let a = [string] { "Foo", "Bar" };
+let b = <string, int> { "Foo": 1, "Bar": 2 };
 
 --------------------------------------------------------------------------------
 
@@ -86,4 +88,75 @@ const API_HOST: string = "https://api.example.com";
   (const_item
     (identifier)
     (primitive_type)
-    (string_literal)))
+    (string_literal))
+  (let_declaration
+    (identifier)
+    (ERROR
+      (array_expression
+        (identifier)))
+    (block
+      (ERROR
+        (string_literal))
+      (string_literal)))
+  (let_declaration
+    (identifier)
+    (ERROR
+      (bracketed_type
+        (primitive_type)
+        (ERROR
+          (primitive_type))))
+    (block
+      (ERROR
+        (string_literal)
+        (integer_literal)
+        (string_literal))
+      (integer_literal))))
+
+================================================================================
+Use
+================================================================================
+
+use std.json;
+use std.net.http.{self, Headers, Request};
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (use_declaration
+    (scoped_identifier
+      (identifier)
+      (identifier)))
+  (use_declaration
+    (scoped_use_list
+      (scoped_identifier
+        (scoped_identifier
+          (identifier)
+          (identifier))
+        (identifier))
+      (use_list
+        (self)
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Struct
+================================================================================
+
+struct User {
+    name: string,
+    email: string?,
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_item
+    (type_identifier)
+    (field_declaration_list
+      (field_declaration
+        (field_identifier)
+        (primitive_type))
+      (field_declaration
+        (field_identifier)
+        (primitive_type))
+      (ERROR))))

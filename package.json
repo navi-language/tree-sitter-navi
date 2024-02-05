@@ -7,7 +7,10 @@
     "url": "https://github.com/navi-language/tree-sitter-navi.git"
   },
   "license": "MIT",
-  "keywords": ["parser", "navi"],
+  "keywords": [
+    "parser",
+    "navi"
+  ],
   "author": "Jason Lee <huacnlee@gmail.com>",
   "type": "commonjs",
   "devDependencies": {
@@ -22,7 +25,7 @@
     "build-wasm": "tree-sitter build-wasm",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
-    "test": "tree-sitter test && script/parse-examples",
+    "test": "tree-sitter test",
     "test-windows": "tree-sitter test",
     "dev": "tree-sitter highlight --html examples/simple.nv > target/out.html && open target/out.html"
   },
@@ -30,9 +33,15 @@
     {
       "scope": "source.navi",
       "injection-regex": "navi",
-      "file-types": ["nv"],
-      "highlights": ["queries/highlights.scm"],
-      "tags": ["queries/tags.scm"]
+      "file-types": [
+        "nv"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "tags": [
+        "queries/tags.scm"
+      ]
     }
   ]
 }

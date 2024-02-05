@@ -40,7 +40,7 @@
     field: (field_identifier) @function.method))
 (call_expression
   function: (scoped_identifier
-    "::"
+    "."
     name: (identifier) @function))
 
 (generic_function
