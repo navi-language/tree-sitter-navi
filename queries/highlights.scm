@@ -137,6 +137,7 @@
 (char_literal) @string
 (string_literal) @string
 (raw_string_literal) @string
+(string_template) @string
 
 (boolean_literal) @constant.builtin
 (integer_literal) @constant.builtin
@@ -150,3 +151,5 @@
 "*" @operator
 "&" @operator
 "'" @operator
+"?" @operator
+"!" @operator
