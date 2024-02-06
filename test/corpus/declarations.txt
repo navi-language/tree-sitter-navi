@@ -52,10 +52,10 @@ fn foo<T>(x: T?): string? {}
     parameters: (parameters)
     return_type: (primitive_type)
     body: (block
-      (expression_statement
-        (return_expression
-          (ERROR)
-          (identifier)))))
+      (return_expression
+        (string_literal
+          (string_fragment)
+          (MISSING """)))))
   (function_item
     name: (identifier)
     type_parameters: (type_parameters
@@ -63,10 +63,8 @@ fn foo<T>(x: T?): string? {}
     parameters: (parameters
       (parameter
         pattern: (identifier)
-        type: (type_identifier))
-      (ERROR))
+        type: (type_identifier)))
     return_type: (primitive_type)
-    (ERROR)
     body: (block)))
 
 ================================================================================
@@ -88,7 +86,8 @@ let b = <string, int> { "Foo": 1, "Bar": 2 };
   (const_item
     (identifier)
     (primitive_type)
-    (string_literal))
+    (string_literal
+      (string_fragment)))
   (let_declaration
     (identifier)
     (ERROR
@@ -96,20 +95,24 @@ let b = <string, int> { "Foo": 1, "Bar": 2 };
         (identifier)))
     (block
       (ERROR
-        (string_literal))
-      (string_literal)))
+        (string_literal
+          (string_fragment)))
+      (string_literal
+        (string_fragment))))
   (let_declaration
     (identifier)
     (ERROR
       (bracketed_type
         (primitive_type)
         (ERROR
-          (primitive_type))))
+          (identifier))))
     (block
       (ERROR
-        (string_literal)
+        (string_literal
+          (string_fragment))
         (integer_literal)
-        (string_literal))
+        (string_literal
+          (string_fragment)))
       (integer_literal))))
 
 ================================================================================
@@ -158,5 +161,85 @@ struct User {
         (primitive_type))
       (field_declaration
         (field_identifier)
-        (primitive_type))
-      (ERROR))))
+        (primitive_type)))))
+
+================================================================================
+Switch statement
+================================================================================
+let a = "foo";
+switch (x) {
+    case 1:
+        let a = "one";
+    case 2: {
+        let a = "two";
+    }
+    default:
+        let a = "default";
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_declaration
+    (identifier)
+    (string_literal
+      (string_fragment)))
+  (expression_statement
+    (switch_expression
+      (parenthesized_expression
+        (identifier))
+      (switch_block
+        (switch_case_arm
+          (integer_literal)
+          (expression_statement
+            (assignment_expression
+              (identifier)
+              (ERROR
+                (identifier))
+              (string_literal
+                (string_fragment)))))
+        (switch_case_arm
+          (integer_literal)
+          (expression_statement
+            (block
+              (let_declaration
+                (identifier)
+                (string_literal
+                  (string_fragment))))))
+        (switch_case_arm
+          (expression_statement
+            (assignment_expression
+              (identifier)
+              (ERROR
+                (identifier))
+              (string_literal
+                (string_fragment)))))))))
+
+================================================================================
+String interpolation
+================================================================================
+
+let name = "Alice";
+let greeting = `Hello,\n ${name}!`;
+let c = `foo`;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (let_declaration
+    (identifier)
+    (string_literal
+      (string_fragment)))
+  (let_declaration
+    (identifier)
+    (string_template
+      (string_fragment)
+      (escape_sequence)
+      (string_fragment)
+      (string_template_substitution
+        (identifier))
+      (string_fragment)))
+  (let_declaration
+    (identifier)
+    (string_template
+      (string_fragment))))

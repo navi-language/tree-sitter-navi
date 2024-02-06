@@ -122,6 +122,9 @@
 "type" @keyword
 "use" @keyword
 "while" @keyword
+"assert" @keyword
+"assert_eq" @keyword
+"assert_ne" @keyword
 (crate) @keyword
 (mutable_specifier) @keyword
 (use_list (self) @keyword)
