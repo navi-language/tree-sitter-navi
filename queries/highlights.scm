@@ -125,12 +125,9 @@
 "assert" @keyword
 "assert_eq" @keyword
 "assert_ne" @keyword
-(crate) @keyword
-(mutable_specifier) @keyword
 (use_list (self) @keyword)
 (scoped_use_list (self) @keyword)
 (scoped_identifier (self) @keyword)
-(super) @keyword
 
 (self) @variable.builtin
 
