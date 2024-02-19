@@ -56,6 +56,14 @@
         "named": true
       },
       {
+        "type": "throw_item",
+        "named": true
+      },
+      {
+        "type": "try_item",
+        "named": true
+      },
+      {
         "type": "type_item",
         "named": true
       },
@@ -3209,6 +3217,21 @@
     }
   },
   {
+    "type": "throw_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "token_tree",
     "named": true,
     "fields": {},
@@ -3288,6 +3311,21 @@
       "types": [
         {
           "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "try_item",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression_statement",
           "named": true
         }
       ]

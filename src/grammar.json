@@ -119,6 +119,14 @@
         {
           "type": "SYMBOL",
           "name": "test_item"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "try_item"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "throw_item"
         }
       ]
     },
@@ -1461,6 +1469,41 @@
             "type": "SYMBOL",
             "name": "block"
           }
+        }
+      ]
+    },
+    "try_item": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "try"
+            },
+            {
+              "type": "STRING",
+              "value": "try!"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression_statement"
+        }
+      ]
+    },
+    "throw_item": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "throw"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression_statement"
         }
       ]
     },

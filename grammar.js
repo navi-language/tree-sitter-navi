@@ -134,6 +134,8 @@ module.exports = grammar({
         $.let_declaration,
         $.use_declaration,
         $.test_item,
+        $.try_item,
+        $.throw_item,
       ),
 
     // Matches non-delimiter tokens common to both macro invocations and
@@ -338,6 +340,10 @@ module.exports = grammar({
 
     test_item: ($) =>
       seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
+
+    try_item: ($) => seq(choice("try", "try!"), $.expression_statement),
+
+    throw_item: ($) => seq("throw", $.expression_statement),
 
     impl_item: ($) =>
       seq(

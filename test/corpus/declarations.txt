@@ -277,3 +277,34 @@ bench "hello" {
         (ERROR
             (integer_literal)
             (integer_literal))))))
+
+================================================================================
+Try & Throw statement
+================================================================================
+
+try item.method();
+try! item.method();
+
+throw "error";
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (expression_statement
+    (try_expression
+        (call_expression
+        (field_expression
+            (identifier)
+            (field_identifier))
+        (arguments))))
+    (expression_statement
+    (try_expression
+        (call_expression
+        (field_expression
+            (identifier)
+            (field_identifier))
+        (arguments))))
+    (throw_item
+    (expression_statement
+        (string_literal
+        (string_fragment)))))
