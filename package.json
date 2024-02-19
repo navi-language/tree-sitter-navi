@@ -30,9 +30,11 @@
     {
       "scope": "source.navi",
       "injection-regex": "navi",
-      "file-types": ["nv"],
+      "file-types": ["nv", "navi"],
       "highlights": ["queries/highlights.scm"],
-      "tags": ["queries/tags.scm"]
+      "tags": ["queries/tags.scm"],
+      "outline": ["queries/outline.scm"],
+      "brackets": ["queries/brackets.scm"]
     }
   ]
 }
