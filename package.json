@@ -24,7 +24,7 @@
     "parse": "tree-sitter parse",
     "test": "tree-sitter test",
     "test-windows": "tree-sitter test",
-    "dev": "tree-sitter highlight --html examples/*.nv > target/out.html && open target/out.html"
+    "dev": "bun run build && tree-sitter highlight --html examples/*.nv > target/out.html && open target/out.html"
   },
   "tree-sitter": [
     {

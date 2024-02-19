@@ -63,7 +63,7 @@ pub fn send_request(path: string, payload: value.Value): value.Value? {
         case "/api/v1/orders":
             headers.set("Authorization", "Bearer 123456");
         default:
-            headers.set("Authorization", "Bearer ABC");
+            headers.set("Authorization", "Bearer ABC")!;
     }
 
     let req = Request.new(
@@ -72,6 +72,10 @@ pub fn send_request(path: string, payload: value.Value): value.Value? {
         headers: headers,
         body: querystring(payload).bytes()
     );
+
+    if (1 == 2) {
+        throw "Hello world, this is error";
+    }
 
     let res = req.send();
 
@@ -164,7 +168,7 @@ fn main() {
     io.println(`Hello, ${user.name}`);
 
     for (let candlestick in candlesticks) {
-        t.execute(time: candlestick.time, close: candlestick.close);
+        try! t.execute(time: candlestick.time, close: candlestick.close);
 
         for (let candlestick in candlesticks) {
             t.execute(time: candlestick.time, close: candlestick.close);

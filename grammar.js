@@ -96,7 +96,6 @@ module.exports = grammar({
     [$.unit_type, $.tuple_pattern],
     [$.scoped_identifier, $.scoped_type_identifier],
     [$.parameters, $._pattern],
-    [$.type_parameters, $.for_lifetimes],
     [$.array_expression],
     [$.scoped_identifier, $._expression_except_range],
     [$._type, $.scoped_identifier],
@@ -164,6 +163,7 @@ module.exports = grammar({
         "const",
         "continue",
         "default",
+        "default",
         "defer",
         "do",
         "else",
@@ -191,7 +191,6 @@ module.exports = grammar({
         "type",
         "use",
         "while",
-        "default",
       ),
 
     // Section - Declarations
@@ -201,6 +200,8 @@ module.exports = grammar({
     inner_attribute_item: ($) => seq("#", "!", "[", $.attribute, "]"),
 
     _option_type: ($) => seq($._type, optional("?")),
+
+    unwrap_expression: ($) => seq($._expression, token("!")),
 
     attribute: ($) =>
       seq(
@@ -341,7 +342,7 @@ module.exports = grammar({
     test_item: ($) =>
       seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
 
-    try_item: ($) => seq(choice("try", "try!"), $.expression_statement),
+    try_item: ($) => seq("try", optional("!"), $.expression_statement),
 
     throw_item: ($) => seq("throw", $.expression_statement),
 
@@ -563,12 +564,8 @@ module.exports = grammar({
         "]",
       ),
 
-    for_lifetimes: ($) =>
-      seq("for", "<", sepBy1(",", $.lifetime), optional(","), ">"),
-
     function_type: ($) =>
       seq(
-        optional($.for_lifetimes),
         prec(
           PREC.call,
           seq(
@@ -735,7 +732,6 @@ module.exports = grammar({
         $.field_expression,
         $.array_expression,
         $.tuple_expression,
-        prec(1, $.macro_invocation),
         $.unit_expression,
         $.break_expression,
         $.continue_expression,
@@ -745,6 +741,7 @@ module.exports = grammar({
         $.parenthesized_expression,
         $.struct_expression,
         $._expression_ending_with_block,
+        $.unwrap_expression,
       ),
 
     _expression_ending_with_block: ($) =>
@@ -760,16 +757,6 @@ module.exports = grammar({
         $.loop_expression,
         $.for_expression,
         $.const_block,
-      ),
-
-    macro_invocation: ($) =>
-      seq(
-        field(
-          "macro",
-          choice($.scoped_identifier, $.identifier, $._reserved_identifier),
-        ),
-        "!",
-        alias($.delim_token_tree, $.token_tree),
       ),
 
     delim_token_tree: ($) =>
@@ -1155,6 +1142,7 @@ module.exports = grammar({
 
     _pattern: ($) =>
       choice(
+        $.let_declaration,
         $._literal_pattern,
         alias(choice(...primitive_types), $.identifier),
         $.identifier,
@@ -1172,7 +1160,6 @@ module.exports = grammar({
         $.range_pattern,
         $.or_pattern,
         $.const_block,
-        $.macro_invocation,
         "_",
       ),
 
@@ -1306,7 +1293,7 @@ module.exports = grammar({
         "`",
       ),
 
-    string_template_fragment: (_) => token.immediate(prec(1, /[^`$\\]+/)),
+    string_template_fragment: (_) => token.immediate(prec(1, /[^`\$\\]+/)),
 
     string_template_substitution: ($) => seq("${", $._expression, "}"),
 
