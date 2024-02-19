@@ -1,0 +1,10 @@
+# Development
+
+1. Update `grammar.js` and run `bun run build` to generate the parser.
+2. Run `bun run test` to run the tests.
+3. If you have update the grammar, you can write new tests in `test/` and run `bun run test` to see if they pass.
+
+## Release new version
+
+1. Update `Cargo.toml` with the new version number.
+2. Run `cargo publish` to publish the new version to crates.io.
