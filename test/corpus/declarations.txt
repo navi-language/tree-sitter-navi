@@ -243,3 +243,37 @@ let c = `foo`;
     (identifier)
     (string_template
       (string_fragment))))
+
+================================================================================
+Test & Bench
+================================================================================
+
+test "hello" {
+    assert_eq 1, 1;
+}
+
+bench "hello" {
+    assert_eq 1, 1;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (test_item
+    (string_literal
+        (string_fragment))
+    (block
+        (expression_statement
+        (identifier)
+        (ERROR
+            (integer_literal)
+            (integer_literal)))))
+    (test_item
+    (string_literal
+        (string_fragment))
+    (block
+        (expression_statement
+        (identifier)
+        (ERROR
+            (integer_literal)
+            (integer_literal))))))

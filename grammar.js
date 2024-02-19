@@ -133,6 +133,7 @@ module.exports = grammar({
         $.associated_type,
         $.let_declaration,
         $.use_declaration,
+        $.test_item,
       ),
 
     // Matches non-delimiter tokens common to both macro invocations and
@@ -334,6 +335,9 @@ module.exports = grammar({
         ),
         ";",
       ),
+
+    test_item: ($) =>
+      seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
 
     impl_item: ($) =>
       seq(

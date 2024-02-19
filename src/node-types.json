@@ -52,6 +52,10 @@
         "named": true
       },
       {
+        "type": "test_item",
+        "named": true
+      },
+      {
         "type": "type_item",
         "named": true
       },
@@ -3176,6 +3180,32 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "test_item",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
     }
   },
   {
