@@ -376,3 +376,30 @@ for (let key, value in values) {
         (identifier)
         (identifier)
         (block))))
+
+================================================================================
+Type Assertion
+================================================================================
+
+let b = a.(string);
+
+if (let b = value.(type)) {
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (let_declaration
+    (identifier)
+    (field_expression
+        (identifier)
+        (type_assertion
+        (primitive_type))))
+    (expression_statement
+    (if_expression
+        (let_condition
+        (identifier)
+        (field_expression
+            (identifier)
+            (type_assertion)))
+        (block))))

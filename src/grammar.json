@@ -3331,6 +3331,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "type_assertion"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call_expression"
         },
         {
@@ -3406,10 +3410,6 @@
         {
           "type": "SYMBOL",
           "name": "generic_function"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "await_expression"
         },
         {
           "type": "SYMBOL",
@@ -3653,6 +3653,10 @@
           "content": {
             "type": "CHOICE",
             "members": [
+              {
+                "type": "SYMBOL",
+                "name": "type_assertion"
+              },
               {
                 "type": "SYMBOL",
                 "name": "identifier"
@@ -4314,6 +4318,32 @@
           }
         ]
       }
+    },
+    "type_assertion": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "type"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_option_type"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "type_cast_expression": {
       "type": "PREC_LEFT",
@@ -5671,27 +5701,6 @@
         ]
       }
     },
-    "await_expression": {
-      "type": "PREC",
-      "value": 14,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_expression"
-          },
-          {
-            "type": "STRING",
-            "value": "."
-          },
-          {
-            "type": "STRING",
-            "value": "await"
-          }
-        ]
-      }
-    },
     "field_expression": {
       "type": "PREC",
       "value": 14,
@@ -5716,6 +5725,10 @@
             "content": {
               "type": "CHOICE",
               "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type_assertion"
+                },
                 {
                   "type": "SYMBOL",
                   "name": "_field_identifier"
@@ -7014,6 +7027,10 @@
     [
       "union_type",
       "type_item"
+    ],
+    [
+      "_type",
+      "_expression_except_range"
     ]
   ],
   "precedences": [],

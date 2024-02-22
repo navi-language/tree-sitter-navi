@@ -103,6 +103,7 @@ module.exports = grammar({
     [$._type, $.scoped_type_identifier],
     [$.expression_statement, $.switch_case_arm],
     [$.union_type, $.type_item],
+    [$._type, $._expression_except_range],
   ],
 
   word: ($) => $.identifier,
@@ -706,6 +707,7 @@ module.exports = grammar({
         $.assignment_expression,
         $.compound_assignment_expr,
         $.type_cast_expression,
+        $.type_assertion,
         $.call_expression,
         $.return_expression,
         $.yield_expression,
@@ -716,7 +718,6 @@ module.exports = grammar({
         $.self,
         $.scoped_identifier,
         $.generic_function,
-        $.await_expression,
         $.field_expression,
         $.array_expression,
         $.tuple_expression,
@@ -773,7 +774,7 @@ module.exports = grammar({
           ),
         ),
         ".",
-        field("name", choice($.identifier, $.super)),
+        field("name", choice($.type_assertion, $.identifier, $.super)),
       ),
 
     scoped_type_identifier_in_expression_position: ($) =>
@@ -884,6 +885,8 @@ module.exports = grammar({
           field("right", $._expression),
         ),
       ),
+
+    type_assertion: ($) => seq("(", choice("type", $._option_type), ")"),
 
     type_cast_expression: ($) =>
       prec.left(
@@ -1098,15 +1101,16 @@ module.exports = grammar({
     index_expression: ($) =>
       prec(PREC.call, seq($._expression, "[", $._expression, "]")),
 
-    await_expression: ($) => prec(PREC.field, seq($._expression, ".", "await")),
-
     field_expression: ($) =>
       prec(
         PREC.field,
         seq(
           field("value", $._expression),
           ".",
-          field("field", choice($._field_identifier, $.integer_literal)),
+          field(
+            "field",
+            choice($.type_assertion, $._field_identifier, $.integer_literal),
+          ),
         ),
       ),
 
