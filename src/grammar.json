@@ -2313,10 +2313,6 @@
                           "name": "self_parameter"
                         },
                         {
-                          "type": "SYMBOL",
-                          "name": "variadic_parameter"
-                        },
-                        {
                           "type": "STRING",
                           "value": "_"
                         }
@@ -2358,10 +2354,6 @@
                               {
                                 "type": "SYMBOL",
                                 "name": "self_parameter"
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "variadic_parameter"
                               },
                               {
                                 "type": "STRING",
@@ -2410,7 +2402,7 @@
     },
     "variadic_parameter": {
       "type": "STRING",
-      "value": "..."
+      "value": ".."
     },
     "parameter": {
       "type": "SEQ",
@@ -2696,7 +2688,7 @@
         },
         {
           "type": "STRING",
-          "value": "]"
+          "value": ">"
         }
       ]
     },

@@ -313,17 +313,25 @@ module.exports = grammar({
 
     function_item: ($) =>
       seq(
+        // pub
         optional($.visibility_modifier),
         "fn",
+        // function_name
         field("name", choice($.identifier, $.metavariable)),
+        // <T>
         field("type_parameters", optional($.type_parameters)),
+        // (a: int, b: string)
         field("parameters", $.parameters),
+        // : int throws
         optional(
           choice(
+            // : int throws
             seq(":", field("return_type", $._option_type), optional("throws")),
+            // throws
             seq("throws"),
           ),
         ),
+        // {}
         field("body", $.block),
       ),
 
@@ -487,11 +495,11 @@ module.exports = grammar({
         sepBy(
           ",",
           seq(
+            // #[attribute]
             optional($.attribute_item),
             choice(
               $.parameter,
               $.self_parameter,
-              $.variadic_parameter,
               "_",
               // $._option_type,
             ),
@@ -509,7 +517,7 @@ module.exports = grammar({
         $.self,
       ),
 
-    variadic_parameter: (_) => "...",
+    variadic_parameter: (_) => "..",
 
     parameter: ($) =>
       seq(
@@ -518,6 +526,7 @@ module.exports = grammar({
         choice(
           seq(
             field("type", $._option_type),
+            // = default_value
             optional(seq("=", field("default", $._expression))),
           ),
           seq("..", field("type", $._option_type)),
@@ -564,7 +573,7 @@ module.exports = grammar({
         field("key", $._option_type),
         ",",
         field("value", $._option_type),
-        "]",
+        ">",
       ),
 
     function_type: ($) =>

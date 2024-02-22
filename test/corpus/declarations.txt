@@ -403,3 +403,50 @@ if (let b = value.(type)) {
             (identifier)
             (type_assertion)))
         (block))))
+
+================================================================================
+Function Declaration with Map, Option
+================================================================================
+
+pub fn option_params(a: string, b: int?, c: int = 100, d: ..int?): <string, int?> throws {
+}
+
+fn test(named_values: <string, int?>): <string, int?> {
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (function_item
+    (visibility_modifier)
+    (identifier)
+    (parameters
+        (parameter
+        (identifier)
+        (primitive_type))
+        (parameter
+        (identifier)
+        (primitive_type))
+        (parameter
+        (identifier)
+        (primitive_type)
+        (integer_literal))
+        (parameter
+        (identifier)
+        (primitive_type)))
+    (map_type
+        (primitive_type)
+        (primitive_type))
+    (block))
+    (function_item
+    (identifier)
+    (parameters
+        (parameter
+        (identifier)
+        (map_type
+            (primitive_type)
+            (primitive_type))))
+    (map_type
+        (primitive_type)
+        (primitive_type))
+    (block)))
