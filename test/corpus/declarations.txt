@@ -445,3 +445,49 @@ fn test(named_values: <string, int?>): <string, int?> {
         (primitive_type)
         (primitive_type))
     (block)))
+
+================================================================================
+Closure Expression
+================================================================================
+
+let a = |x: int, y: int| {
+    return x + y;
+};
+
+call(|x, y| {
+    return x + y;
+});
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (let_declaration
+    (identifier)
+    (closure_expression
+        (closure_parameters
+        (parameter
+            (identifier)
+            (primitive_type))
+        (parameter
+            (identifier)
+            (primitive_type)))
+        (block
+        (expression_statement
+            (return_expression
+            (binary_expression
+                (identifier)
+                (identifier)))))))
+    (expression_statement
+    (call_expression
+        (identifier)
+        (arguments
+        (closure_expression
+            (closure_parameters
+            (identifier)
+            (identifier))
+            (block
+            (expression_statement
+                (return_expression
+                (binary_expression
+                    (identifier)
+                    (identifier))))))))))
