@@ -158,6 +158,10 @@
         "named": true
       },
       {
+        "type": "map_expression",
+        "named": true
+      },
+      {
         "type": "metavariable",
         "named": true
       },
@@ -433,28 +437,17 @@
   {
     "type": "array_expression",
     "named": true,
-    "fields": {
-      "length": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "_expression",
           "named": true
         },
         {
-          "type": "attribute_item",
+          "type": "array_type",
           "named": true
         }
       ]
@@ -888,6 +881,10 @@
           },
           {
             "type": "loop_expression",
+            "named": true
+          },
+          {
+            "type": "map_expression",
             "named": true
           },
           {
@@ -2256,6 +2253,25 @@
       "types": [
         {
           "type": "label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "map_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        },
+        {
+          "type": "map_type",
           "named": true
         }
       ]

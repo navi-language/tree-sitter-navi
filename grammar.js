@@ -104,6 +104,8 @@ module.exports = grammar({
     [$.expression_statement, $.switch_case_arm],
     [$.union_type, $.type_item],
     [$._type, $._expression_except_range],
+    [$.array_expression, $.block],
+    [$.map_expression, $.block],
   ],
 
   word: ($) => $.identifier,
@@ -729,6 +731,7 @@ module.exports = grammar({
         $.generic_function,
         $.field_expression,
         $.array_expression,
+        $.map_expression,
         $.tuple_expression,
         $.unit_expression,
         $.break_expression,
@@ -928,16 +931,20 @@ module.exports = grammar({
 
     array_expression: ($) =>
       seq(
-        "[",
-        repeat($.attribute_item),
-        choice(
-          seq($._expression, ";", field("length", $._expression)),
-          seq(
-            sepBy(",", seq(repeat($.attribute_item), $._expression)),
-            optional(","),
-          ),
-        ),
-        "]",
+        $.array_type,
+        "{",
+        seq(sepBy(",", $._expression), optional(",")),
+        optional(","),
+        "}",
+      ),
+
+    map_expression: ($) =>
+      seq(
+        $.map_type,
+        "{",
+        sepBy(",", seq($._literal, ":", $._expression)),
+        optional(","),
+        "}",
       ),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),

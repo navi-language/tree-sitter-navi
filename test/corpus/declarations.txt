@@ -79,41 +79,36 @@ let b = <string, int> { "Foo": 1, "Bar": 2 };
 --------------------------------------------------------------------------------
 
 (source_file
-  (let_declaration
+    (let_declaration
     (identifier)
     (primitive_type)
     (integer_literal))
-  (const_item
+    (const_item
     (identifier)
     (primitive_type)
     (string_literal
-      (string_fragment)))
-  (let_declaration
+        (string_fragment)))
+    (let_declaration
     (identifier)
-    (ERROR
-      (array_expression
-        (identifier)))
-    (block
-      (ERROR
+    (array_expression
+        (array_type
+        (primitive_type))
         (string_literal
-          (string_fragment)))
-      (string_literal
+        (string_fragment))
+        (string_literal
         (string_fragment))))
-  (let_declaration
+    (let_declaration
     (identifier)
-    (ERROR
-      (bracketed_type
+    (map_expression
+        (map_type
         (primitive_type)
-        (ERROR
-          (identifier))))
-    (block
-      (ERROR
+        (primitive_type))
         (string_literal
-          (string_fragment))
+        (string_fragment))
         (integer_literal)
         (string_literal
-          (string_fragment)))
-      (integer_literal))))
+        (string_fragment))
+        (integer_literal))))
 
 ================================================================================
 Use
