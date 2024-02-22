@@ -543,7 +543,6 @@ module.exports = grammar({
         $._type_identifier,
         // $.macro_invocation,
         // $.empty_type,
-        // $.dynamic_type,
         // $.bounded_type,
         alias(choice(...primitive_types), $.primitive_type),
       ),
@@ -682,20 +681,6 @@ module.exports = grammar({
       seq(
         "impl",
         optional(seq("for", $.type_parameters)),
-        field(
-          "trait",
-          choice(
-            $._type_identifier,
-            $.scoped_type_identifier,
-            $.generic_type,
-            $.function_type,
-          ),
-        ),
-      ),
-
-    dynamic_type: ($) =>
-      seq(
-        "dyn",
         field(
           "trait",
           choice(
@@ -1005,7 +990,9 @@ module.exports = grammar({
       prec.right(
         seq(
           "if",
+          "(",
           field("condition", $._condition),
+          ")",
           field("consequence", $.block),
           optional(field("alternative", $.else_clause)),
         ),
@@ -1068,11 +1055,14 @@ module.exports = grammar({
 
     for_expression: ($) =>
       seq(
-        optional(seq($.label, ":")),
         "for",
+        "(",
+        "let",
         field("pattern", $._pattern),
+        optional(seq(",", $.identifier)),
         "in",
         field("value", $._expression),
+        ")",
         field("body", $.block),
       ),
 
@@ -1145,7 +1135,6 @@ module.exports = grammar({
 
     _pattern: ($) =>
       choice(
-        $.let_declaration,
         $._literal_pattern,
         alias(choice(...primitive_types), $.identifier),
         $.identifier,

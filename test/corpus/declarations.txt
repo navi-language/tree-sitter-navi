@@ -342,3 +342,37 @@ pub type BindValue = int | string | bool | float | DateTime | Duration | [string
                     (union_type
                         (array_type
                         (primitive_type)))))))))))))
+
+================================================================================
+If let & For let
+================================================================================
+
+if (let a = value) {
+}
+
+for (let a in values) {
+}
+
+for (let key, value in values) {
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (expression_statement
+    (if_expression
+        (let_condition
+        (identifier)
+        (identifier))
+        (block)))
+    (expression_statement
+    (for_expression
+        (identifier)
+        (identifier)
+        (block)))
+    (expression_statement
+    (for_expression
+        (identifier)
+        (identifier)
+        (identifier)
+        (block))))

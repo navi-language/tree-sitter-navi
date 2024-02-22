@@ -328,10 +328,6 @@
         "named": true
       },
       {
-        "type": "let_declaration",
-        "named": true
-      },
-      {
         "type": "mut_pattern",
         "named": true
       },
@@ -1663,7 +1659,7 @@
       "required": false,
       "types": [
         {
-          "type": "label",
+          "type": "identifier",
           "named": true
         }
       ]
@@ -4075,10 +4071,6 @@
   },
   {
     "type": "do",
-    "named": false
-  },
-  {
-    "type": "dyn",
     "named": false
   },
   {

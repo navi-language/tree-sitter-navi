@@ -3285,40 +3285,6 @@
         }
       ]
     },
-    "dynamic_type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "dyn"
-        },
-        {
-          "type": "FIELD",
-          "name": "trait",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_type_identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "scoped_type_identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "generic_type"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "function_type"
-              }
-            ]
-          }
-        }
-      ]
-    },
     "mutable_specifier": {
       "type": "STRING",
       "value": "mut"
@@ -4951,12 +4917,20 @@
             "value": "if"
           },
           {
+            "type": "STRING",
+            "value": "("
+          },
+          {
             "type": "FIELD",
             "name": "condition",
             "content": {
               "type": "SYMBOL",
               "name": "_condition"
             }
+          },
+          {
+            "type": "STRING",
+            "value": ")"
           },
           {
             "type": "FIELD",
@@ -5349,29 +5323,16 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "label"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "for"
         },
         {
           "type": "STRING",
-          "value": "for"
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": "let"
         },
         {
           "type": "FIELD",
@@ -5380,6 +5341,27 @@
             "type": "SYMBOL",
             "name": "_pattern"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -5392,6 +5374,10 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         },
         {
           "type": "FIELD",
@@ -5885,10 +5871,6 @@
     "_pattern": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "let_declaration"
-        },
         {
           "type": "SYMBOL",
           "name": "_literal_pattern"
