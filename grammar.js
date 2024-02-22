@@ -102,6 +102,7 @@ module.exports = grammar({
     [$._type, $.scoped_identifier, $.scoped_type_identifier],
     [$._type, $.scoped_type_identifier],
     [$.expression_statement, $.switch_case_arm],
+    [$.union_type, $.type_item],
   ],
 
   word: ($) => $.identifier,
@@ -303,9 +304,11 @@ module.exports = grammar({
         field("name", $._type_identifier),
         // field("type_parameters", optional($.type_parameters)),
         "=",
-        field("type", $._option_type),
+        field("type", choice($.union_type, $._option_type)),
         ";",
       ),
+
+    union_type: ($) => seq($._option_type, optional(seq("|", $.union_type))),
 
     function_item: ($) =>
       seq(

@@ -1210,13 +1210,52 @@
           "type": "FIELD",
           "name": "type",
           "content": {
-            "type": "SYMBOL",
-            "name": "_option_type"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "union_type"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_option_type"
+              }
+            ]
           }
         },
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "union_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_option_type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "|"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "union_type"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -6989,6 +7028,10 @@
     [
       "expression_statement",
       "switch_case_arm"
+    ],
+    [
+      "union_type",
+      "type_item"
     ]
   ],
   "precedences": [],

@@ -3440,6 +3440,10 @@
           {
             "type": "_type",
             "named": true
+          },
+          {
+            "type": "union_type",
+            "named": true
           }
         ]
       }
@@ -3484,6 +3488,25 @@
       "types": [
         {
           "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "union_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_type",
+          "named": true
+        },
+        {
+          "type": "union_type",
           "named": true
         }
       ]

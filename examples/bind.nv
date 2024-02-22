@@ -1,0 +1,55 @@
+use std.io;
+use std.time.DateTime;
+use std.time.Duration;
+
+use _sql.BindValue as _BindValue;
+
+/// A union type for query binding values.
+pub type BindValue = int | string | bool | float | DateTime | Duration | [string] | [int] | [float];
+
+fn convert_bind_value(value: BindValue?): _BindValue {
+    if (let value = value) {
+        switch (let val = value.(type)) {
+            case int:
+                return _BindValue.from_int(val);
+            case string:
+                return _BindValue.from_string(val);
+            case bool:
+                return _BindValue.from_bool(val);
+            case float:
+                return _BindValue.from_float(val);
+            case DateTime:
+                return _BindValue.from_datetime(val._as_inner());
+            case Duration:
+                return _BindValue.from_duration(val._as_inner());
+            case [string]:
+                return _BindValue.from_string_array(val);
+            case [int]:
+                return _BindValue.from_int_array(val);
+            case [float]:
+                return _BindValue.from_float_array(val);
+        }
+    } else {
+        return _BindValue.null();
+    }
+}
+
+fn build_bind_values(values: ..BindValue?): [_BindValue] {
+    let results = [_BindValue] {};
+
+    for (let value in values) {
+        results.push(convert_bind_value(value));
+    }
+
+    return results;
+}
+
+fn build_named_values(named_values: <string, BindValue?>): <string, _BindValue> {
+    let results = <string, _BindValue> {};
+    for (let key, value in named_values) {
+        if (let value = value) {
+            results[key] = convert_bind_value(value);
+        }
+    }
+    return results;
+}
