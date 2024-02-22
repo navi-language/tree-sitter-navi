@@ -215,7 +215,7 @@ String interpolation
 ================================================================================
 
 let name = "Alice";
-let greeting = `Hello,\n ${name}!`;
+let greeting = `Hello,\n ${name} ${name.to_int() + 1 + 2 + "foo"}!`;
 let c = `foo`;
 
 --------------------------------------------------------------------------------
@@ -233,6 +233,20 @@ let c = `foo`;
       (string_fragment)
       (string_template_substitution
         (identifier))
+      (string_fragment)
+        (string_template_substitution
+        (binary_expression
+            (binary_expression
+            (binary_expression
+                (call_expression
+                (field_expression
+                    (identifier)
+                    (field_identifier))
+                (arguments))
+                (integer_literal))
+            (integer_literal))
+            (string_literal
+            (string_fragment))))
       (string_fragment)))
   (let_declaration
     (identifier)
