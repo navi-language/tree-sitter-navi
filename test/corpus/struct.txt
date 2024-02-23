@@ -1,0 +1,62 @@
+================================================================================
+Field with attribute & default value
+================================================================================
+
+struct FunctionDesc {
+    deprecated: string? = nil,
+    #[serde(rename = "async")]
+    _async: bool = false,
+    args: [Argument] = {},
+    returns: [string]? = nil,
+    doc: string? = nil,
+    #[serde(rename = "throws")]
+    _throws: [string]? = nil,
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (struct_item
+    (type_identifier)
+    (field_declaration_list
+        (field_declaration
+        (field_identifier)
+        (primitive_type)
+        (identifier))
+        (attribute_item
+        (attribute
+            (identifier)
+            (token_tree
+            (identifier)
+            (string_literal
+                (string_fragment)))))
+        (field_declaration
+        (field_identifier)
+        (primitive_type)
+        (boolean_literal))
+        (field_declaration
+        (field_identifier)
+        (array_type
+            (type_identifier))
+        (block))
+        (field_declaration
+        (field_identifier)
+        (array_type
+            (primitive_type))
+        (identifier))
+        (field_declaration
+        (field_identifier)
+        (primitive_type)
+        (identifier))
+        (attribute_item
+        (attribute
+            (identifier)
+            (token_tree
+            (identifier)
+            (string_literal
+                (string_fragment)))))
+        (field_declaration
+        (field_identifier)
+        (array_type
+            (primitive_type))
+        (identifier)))))
