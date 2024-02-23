@@ -107,6 +107,13 @@ module.exports = grammar({
     [$._type, $._expression_except_range],
     [$.array_expression, $.block],
     [$.map_expression, $.block],
+    [$.assignment_expression, $.assert_expression],
+    [$.assignment_expression, $.throw_expression],
+    [$.unwrap_expression, $.assert_expression],
+    [$.unwrap_expression, $.throw_expression],
+    [$.compound_assignment_expr, $.assert_expression],
+    [$.compound_assignment_expr, $.throw_expression],
+    [$.expression_statement, $.throw_expression],
   ],
 
   word: ($) => $.identifier,
@@ -138,8 +145,6 @@ module.exports = grammar({
         $.let_declaration,
         $.use_declaration,
         $.test_item,
-        $.try_item,
-        $.throw_item,
       ),
 
     // Matches non-delimiter tokens common to both macro invocations and
@@ -373,10 +378,6 @@ module.exports = grammar({
 
     test_item: ($) =>
       seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
-
-    try_item: ($) => seq("try", optional("!"), $.expression_statement),
-
-    throw_item: ($) => seq("throw", $.expression_statement),
 
     impl_item: ($) =>
       seq(
@@ -741,6 +742,8 @@ module.exports = grammar({
         $.call_expression,
         $.return_expression,
         $.yield_expression,
+        $.throw_expression,
+        $.assert_expression,
         $._literal,
         prec.left($.identifier),
         alias(choice(...primitive_types), $.identifier),
@@ -930,6 +933,19 @@ module.exports = grammar({
 
     yield_expression: ($) =>
       choice(prec.left(seq("yield", $._expression)), prec(-1, "yield")),
+
+    assert_expression: ($) =>
+      choice(
+        seq("assert", $._expression),
+        seq(
+          choice("assert_eq", "assert_ne"),
+          $._expression,
+          ",",
+          $._expression,
+        ),
+      ),
+
+    throw_expression: ($) => seq(choice("throw", "panic"), $._expression),
 
     call_expression: ($) =>
       prec(

@@ -4,15 +4,15 @@ Function declarations
 
 fn main() {}
 
-fn add(x: int, y: int): int {
-    return x + y;
+fn add(x: int, y: int, z: ..int): int {
+    return x + y + sum(..z);
 }
 
 fn takes_slice(slice: string) {
 }
 
 fn foo(): string {
-    return "hello;
+    return "hello";
 }
 
 fn foo<T>(x: T?): string? {}
@@ -20,52 +20,61 @@ fn foo<T>(x: T?): string? {}
 --------------------------------------------------------------------------------
 
 (source_file
-  (function_item
-    name: (identifier)
-    parameters: (parameters)
-    body: (block))
-  (function_item
-    name: (identifier)
-    parameters: (parameters
-      (parameter
-        pattern: (identifier)
-        type: (primitive_type))
-      (parameter
-        pattern: (identifier)
-        type: (primitive_type)))
-    return_type: (primitive_type)
-    body: (block
-      (expression_statement
+    (function_item
+    (identifier)
+    (parameters)
+    (block))
+    (function_item
+    (identifier)
+    (parameters
+        (parameter
+        (identifier)
+        (primitive_type))
+        (parameter
+        (identifier)
+        (primitive_type))
+        (parameter
+        (identifier)
+        (primitive_type)))
+    (primitive_type)
+    (block
+        (expression_statement
         (return_expression
-          (binary_expression
-            left: (identifier)
-            right: (identifier))))))
-  (function_item
-    name: (identifier)
-    parameters: (parameters
-      (parameter
-        pattern: (identifier)
-        type: (primitive_type)))
-    body: (block))
-  (function_item
-    name: (identifier)
-    parameters: (parameters)
-    return_type: (primitive_type)
-    body: (block
-      (return_expression
-        (string_literal
-          (string_fragment)
-          (MISSING """)))))
-  (function_item
-    name: (identifier)
-    type_parameters: (type_parameters
-      (type_identifier))
-    parameters: (parameters
-      (parameter
-        pattern: (identifier)
-        type: (type_identifier)))
-    return_type: (primitive_type)
-    body: (block)))
+            (binary_expression
+            (binary_expression
+                (identifier)
+                (identifier))
+            (call_expression
+                (identifier)
+                (arguments
+                (range_expression
+                    (identifier)))))))))
+    (function_item
+    (identifier)
+    (parameters
+        (parameter
+        (identifier)
+        (primitive_type)))
+    (block))
+    (function_item
+    (identifier)
+    (parameters)
+    (primitive_type)
+    (block
+        (expression_statement
+        (return_expression
+            (string_literal
+            (string_fragment))))))
+    (function_item
+    (identifier)
+    (type_parameters
+        (type_identifier))
+    (parameters
+        (parameter
+        (identifier)
+        (type_identifier)))
+    (primitive_type)
+    (block)))
 
 ================================================================================
 Variable declarations
@@ -273,8 +282,7 @@ bench "hello" {
         (string_fragment))
     (block
         (expression_statement
-        (identifier)
-        (ERROR
+        (assert_expression
             (integer_literal)
             (integer_literal)))))
     (test_item
@@ -282,8 +290,7 @@ bench "hello" {
         (string_fragment))
     (block
         (expression_statement
-        (identifier)
-        (ERROR
+        (assert_expression
             (integer_literal)
             (integer_literal))))))
 
@@ -313,8 +320,8 @@ throw "error";
             (identifier)
             (field_identifier))
         (arguments))))
-    (throw_item
     (expression_statement
+    (throw_expression
         (string_literal
         (string_fragment)))))
 

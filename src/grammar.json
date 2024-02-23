@@ -119,14 +119,6 @@
         {
           "type": "SYMBOL",
           "name": "test_item"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "try_item"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "throw_item"
         }
       ]
     },
@@ -1657,44 +1649,6 @@
             "type": "SYMBOL",
             "name": "block"
           }
-        }
-      ]
-    },
-    "try_item": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "try"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "!"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression_statement"
-        }
-      ]
-    },
-    "throw_item": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "throw"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression_statement"
         }
       ]
     },
@@ -3476,6 +3430,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "throw_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "assert_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_literal"
         },
         {
@@ -4564,6 +4526,76 @@
             "type": "STRING",
             "value": "yield"
           }
+        }
+      ]
+    },
+    "assert_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "assert"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "assert_eq"
+                },
+                {
+                  "type": "STRING",
+                  "value": "assert_ne"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        }
+      ]
+    },
+    "throw_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "throw"
+            },
+            {
+              "type": "STRING",
+              "value": "panic"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
         }
       ]
     },
@@ -7147,6 +7179,34 @@
     [
       "map_expression",
       "block"
+    ],
+    [
+      "assignment_expression",
+      "assert_expression"
+    ],
+    [
+      "assignment_expression",
+      "throw_expression"
+    ],
+    [
+      "unwrap_expression",
+      "assert_expression"
+    ],
+    [
+      "unwrap_expression",
+      "throw_expression"
+    ],
+    [
+      "compound_assignment_expr",
+      "assert_expression"
+    ],
+    [
+      "compound_assignment_expr",
+      "throw_expression"
+    ],
+    [
+      "expression_statement",
+      "throw_expression"
     ]
   ],
   "precedences": [],

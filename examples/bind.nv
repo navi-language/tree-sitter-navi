@@ -55,3 +55,11 @@ fn build_named_values(named_values: <string, BindValue?>): <string, _BindValue> 
     }
     return results;
 }
+
+test "hello" {
+    assert_eq 1, 1;
+}
+
+bench "hello" {
+    assert_eq 1, 1;
+}
