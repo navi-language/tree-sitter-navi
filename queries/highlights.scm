@@ -76,14 +76,17 @@
   "}"
 ] @punctuation.bracket
 
+(closure_type [
+    "|"
+] @punctuation.bracket)
+(closure_parameters [
+  "|"
+] @punctuation.bracket)
+
 (type_arguments [
   "<"
   ">"
 ] @punctuation.bracket)
-
-(type_parameters
-  "<" @punctuation.bracket
-  ">" @punctuation.bracket)
 
 [
   "::"

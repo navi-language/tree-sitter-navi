@@ -93,6 +93,7 @@ module.exports = grammar({
     // See https://internals.rust-lang.org/t/pre-rfc-deprecating-anonymous-parameters/3710
     [$._option_type],
     [$._type, $._pattern],
+    [$.closure_type, $.tuple_pattern],
     [$.unit_type, $.tuple_pattern],
     [$.scoped_identifier, $.scoped_type_identifier],
     [$.parameters, $._pattern],
@@ -354,6 +355,22 @@ module.exports = grammar({
         ";",
       ),
 
+    closure_type: ($) =>
+      seq(
+        "|",
+        "(",
+        optional(sepBy(",", $._option_type)),
+        ")",
+
+        optional(
+          choice(
+            seq(":", field("return_type", $._option_type), optional("throws")),
+            "throws",
+          ),
+        ),
+        "|",
+      ),
+
     test_item: ($) =>
       seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
 
@@ -554,6 +571,7 @@ module.exports = grammar({
         $.map_type,
         $.function_type,
         $._type_identifier,
+        $.closure_type,
         // $.macro_invocation,
         // $.empty_type,
         // $.bounded_type,
@@ -1092,16 +1110,8 @@ module.exports = grammar({
       prec(
         PREC.closure,
         seq(
-          optional("static"),
-          optional("move"),
           field("parameters", $.closure_parameters),
-          choice(
-            seq(
-              optional(seq("->", field("return_type", $._option_type))),
-              field("body", $.block),
-            ),
-            field("body", choice($._expression, "_")),
-          ),
+          field("body", $._expression),
         ),
       ),
 

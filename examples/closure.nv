@@ -1,0 +1,23 @@
+fn call_add(f: |(int, int): int|): int {
+  return f(2, 3);
+}
+let add: |(int, int): int| = |a, b| {
+  return a + b;
+};
+assert_eq add(1, 2), 3;
+assert_eq call_add(add), 5;
+
+fn call_add1(f: |(): int|): int {
+  return f() + 2;
+}
+assert_eq call_add1(|| {
+    return 3;
+}), 5;
+
+fn call_add2(f: |()|): int {
+    f();
+    return  2;
+}
+assert_eq call_add2(|| {
+    // do something without return
+}), 2;

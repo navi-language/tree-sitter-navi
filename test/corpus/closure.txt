@@ -1,0 +1,50 @@
+================================================================================
+Declaration a Closure
+================================================================================
+
+fn call_add(f: |(int, int): int throws|): int {
+  return f(2, 3);
+}
+
+let add: |(int, int): int| = |a, b| {
+  return a + b;
+};
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+    (function_item
+    (identifier)
+    (parameters
+        (parameter
+        (identifier)
+        (closure_type
+            (primitive_type)
+            (primitive_type)
+            (primitive_type))))
+    (primitive_type)
+    (block
+        (expression_statement
+        (return_expression
+            (call_expression
+            (identifier)
+            (arguments
+                (integer_literal)
+                (integer_literal)))))))
+    (let_declaration
+    (identifier)
+    (closure_type
+        (primitive_type)
+        (primitive_type)
+        (primitive_type))
+    (closure_expression
+        (closure_parameters
+        (identifier)
+        (identifier))
+        (block
+        (expression_statement
+            (return_expression
+            (binary_expression
+                (identifier)
+                (identifier))))))))

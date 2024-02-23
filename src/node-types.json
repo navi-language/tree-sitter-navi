@@ -382,6 +382,10 @@
         "named": true
       },
       {
+        "type": "closure_type",
+        "named": true
+      },
+      {
         "type": "function_type",
         "named": true
       },
@@ -983,10 +987,6 @@
         "required": true,
         "types": [
           {
-            "type": "_",
-            "named": false
-          },
-          {
             "type": "_expression",
             "named": true
           }
@@ -998,20 +998,6 @@
         "types": [
           {
             "type": "closure_parameters",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "?",
-            "named": false
-          },
-          {
-            "type": "_type",
             "named": true
           }
         ]
@@ -1032,6 +1018,36 @@
         },
         {
           "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "closure_type",
+    "named": true,
+    "fields": {
+      "return_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "?",
+            "named": false
+          },
+          {
+            "type": "_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_type",
           "named": true
         }
       ]
@@ -4171,10 +4187,6 @@
     "named": true
   },
   {
-    "type": "move",
-    "named": false
-  },
-  {
     "type": "mutable_specifier",
     "named": true
   },
@@ -4220,10 +4232,6 @@
   },
   {
     "type": "spawn",
-    "named": false
-  },
-  {
-    "type": "static",
     "named": false
   },
   {
