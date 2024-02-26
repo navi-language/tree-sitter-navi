@@ -434,6 +434,10 @@
         {
           "type": "attribute_item",
           "named": true
+        },
+        {
+          "type": "keyword_argument",
+          "named": true
         }
       ]
     }
@@ -2161,6 +2165,32 @@
       "types": [
         {
           "type": "visibility_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "keyword_argument",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
           "named": true
         }
       ]

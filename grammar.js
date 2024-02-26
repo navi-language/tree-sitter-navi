@@ -959,10 +959,19 @@ module.exports = grammar({
     arguments: ($) =>
       seq(
         "(",
-        sepBy(",", seq(repeat($.attribute_item), $._expression)),
+        sepBy(
+          ",",
+          seq(
+            repeat($.attribute_item),
+            choice($._expression, $.keyword_argument),
+          ),
+        ),
         optional(","),
         ")",
       ),
+
+    keyword_argument: ($) =>
+      seq(field("key", $.identifier), ":", $._expression),
 
     array_expression: ($) =>
       seq(

@@ -512,3 +512,44 @@ call(|x, y| {
                 (binary_expression
                     (identifier)
                     (identifier))))))))))
+
+
+================================================================================
+Keyword Arugments
+================================================================================
+
+fn hello(name: string, city: string? = nil, infos: ..int) {
+}
+
+hello("Jason Lee", city: "Chengdu", 1, 2, 3);
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (function_item
+        (identifier)
+        (parameters
+          (parameter
+            (identifier)
+            (primitive_type))
+          (parameter
+            (identifier)
+            (primitive_type)
+            (identifier))
+          (parameter
+            (identifier)
+            (primitive_type)))
+        (block))
+      (expression_statement
+        (call_expression
+          (identifier)
+          (arguments
+            (string_literal
+              (string_fragment))
+            (keyword_argument
+              (identifier)
+              (string_literal
+                (string_fragment)))
+            (integer_literal)
+            (integer_literal)
+            (integer_literal)))))
