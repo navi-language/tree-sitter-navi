@@ -1,0 +1,48 @@
+==================================================================
+Use
+==================================================================
+
+use std.io;
+use std.io.println as _println;
+use std.io.Bytes;
+use std.io.Bytes as _Bytes;
+use std.fs.{self, File, Metadata};
+
+------------------------------------------------------------------
+
+    (source_file
+      (use_declaration
+        (scoped_identifier
+          (identifier)
+          (identifier)))
+      (use_declaration
+        (use_as_clause
+          (scoped_identifier
+            (scoped_identifier
+              (identifier)
+              (identifier))
+            (identifier))
+          (identifier)))
+      (use_declaration
+        (scoped_identifier
+          (scoped_identifier
+            (identifier)
+            (identifier))
+          (identifier)))
+      (use_declaration
+        (use_as_clause
+          (scoped_identifier
+            (scoped_identifier
+              (identifier)
+              (identifier))
+            (identifier))
+          (identifier)))
+      (use_declaration
+        (scoped_use_list
+          (scoped_identifier
+            (identifier)
+            (identifier))
+          (use_list
+            (self)
+            (identifier)
+            (identifier)))))

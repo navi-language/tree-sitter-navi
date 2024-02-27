@@ -1,6 +1,6 @@
 use std.io;
-use std.time.DateTime;
-use std.time.Duration;
+use std.io.Bytes;
+use std.time.{self, DateTime, Duration};
 
 use _sql.BindValue as _BindValue;
 
