@@ -4,7 +4,7 @@ Function declarations
 
 fn main() {}
 
-fn add(x: int, y: int, z: ..int): int {
+fn add(x: int, y: float, info: string, z: ..int): int {
     return x + y + sum(..z);
 }
 
@@ -17,64 +17,80 @@ fn foo(): string {
 
 fn foo<T>(x: T?): string? {}
 
+let a = add(99, 0.00000212, "Hello", 1, 2);
+
 --------------------------------------------------------------------------------
 
-(source_file
-    (function_item
-    (identifier)
-    (parameters)
-    (block))
-    (function_item
-    (identifier)
-    (parameters
-        (parameter
+    (source_file
+      (function_item
         (identifier)
-        (primitive_type))
-        (parameter
+        (parameters)
+        (block))
+      (function_item
         (identifier)
-        (primitive_type))
-        (parameter
+        (parameters
+          (parameter
+            (identifier)
+            (primitive_type))
+          (parameter
+            (identifier)
+            (primitive_type))
+          (parameter
+            (identifier)
+            (primitive_type))
+          (parameter
+            (identifier)
+            (primitive_type)))
+        (primitive_type)
+        (block
+          (expression_statement
+            (return_expression
+              (binary_expression
+                (binary_expression
+                  (identifier)
+                  (identifier))
+                (call_expression
+                  (identifier)
+                  (arguments
+                    (range_expression
+                      (identifier)))))))))
+      (function_item
         (identifier)
-        (primitive_type)))
-    (primitive_type)
-    (block
-        (expression_statement
-        (return_expression
-            (binary_expression
-            (binary_expression
-                (identifier)
-                (identifier))
-            (call_expression
-                (identifier)
-                (arguments
-                (range_expression
-                    (identifier)))))))))
-    (function_item
-    (identifier)
-    (parameters
-        (parameter
+        (parameters
+          (parameter
+            (identifier)
+            (primitive_type)))
+        (block))
+      (function_item
         (identifier)
-        (primitive_type)))
-    (block))
-    (function_item
-    (identifier)
-    (parameters)
-    (primitive_type)
-    (block
-        (expression_statement
-        (return_expression
+        (parameters)
+        (primitive_type)
+        (block
+          (expression_statement
+            (return_expression
+              (string_literal
+                (string_fragment))))))
+      (function_item
+        (identifier)
+        (type_parameters
+          (type_identifier))
+        (parameters
+          (parameter
+            (identifier)
+            (type_identifier)))
+        (primitive_type)
+        (block))
+      (let_declaration
+        (identifier)
+        (call_expression
+          (identifier)
+          (arguments
+            (integer_literal)
+            (float_literal)
             (string_literal
-            (string_fragment))))))
-    (function_item
-    (identifier)
-    (type_parameters
-        (type_identifier))
-    (parameters
-        (parameter
-        (identifier)
-        (type_identifier)))
-    (primitive_type)
-    (block)))
+              (string_fragment))
+            (integer_literal)
+            (integer_literal)))))
 
 ================================================================================
 Variable declarations
@@ -535,7 +551,7 @@ hello("Jason Lee", city: "Chengdu", 1, 2, 3);
           (parameter
             (identifier)
             (primitive_type)
-            (identifier))
+            (nil_literal))
           (parameter
             (identifier)
             (primitive_type)))

@@ -63,7 +63,6 @@ module.exports = grammar({
   externals: ($) => [
     $._string_content,
     $._template_chars,
-    $.raw_string_literal,
     $.float_literal,
     $.block_comment,
   ],
@@ -114,6 +113,7 @@ module.exports = grammar({
     [$.compound_assignment_expr, $.assert_expression],
     [$.compound_assignment_expr, $.throw_expression],
     [$.expression_statement, $.throw_expression],
+    [$._non_delim_token, $.nil_literal],
   ],
 
   word: ($) => $.identifier,
@@ -1283,9 +1283,10 @@ module.exports = grammar({
         $.string_template,
         $.raw_string_literal,
         $.char_literal,
-        $.boolean_literal,
+        $.bool_literal,
         $.integer_literal,
         $.float_literal,
+        $.nil_literal,
       ),
 
     _literal_pattern: ($) =>
@@ -1294,7 +1295,7 @@ module.exports = grammar({
         $.string_template,
         $.raw_string_literal,
         $.char_literal,
-        $.boolean_literal,
+        $.bool_literal,
         $.integer_literal,
         $.float_literal,
         $.negative_literal,
@@ -1327,6 +1328,8 @@ module.exports = grammar({
 
     unescaped_double_string_fragment: (_) =>
       token.immediate(prec(1, /[^"\\\r\n]+/)),
+
+    raw_string_literal: ($) => seq("r", $.string_literal),
 
     string_template: ($) =>
       seq(
@@ -1381,7 +1384,9 @@ module.exports = grammar({
         ),
       ),
 
-    boolean_literal: (_) => choice("true", "false"),
+    bool_literal: (_) => choice("true", "false"),
+
+    nil_literal: (_) => "nil",
 
     comment: ($) => choice($.block_comment, $.line_comment),
 

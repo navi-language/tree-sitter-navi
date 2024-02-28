@@ -6610,7 +6610,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "boolean_literal"
+          "name": "bool_literal"
         },
         {
           "type": "SYMBOL",
@@ -6619,6 +6619,10 @@
         {
           "type": "SYMBOL",
           "name": "float_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nil_literal"
         }
       ]
     },
@@ -6643,7 +6647,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "boolean_literal"
+          "name": "bool_literal"
         },
         {
           "type": "SYMBOL",
@@ -6784,6 +6788,19 @@
           "value": "[^\"\\\\\\r\\n]+"
         }
       }
+    },
+    "raw_string_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "r"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        }
+      ]
     },
     "string_template": {
       "type": "SEQ",
@@ -6959,7 +6976,7 @@
         ]
       }
     },
-    "boolean_literal": {
+    "bool_literal": {
       "type": "CHOICE",
       "members": [
         {
@@ -6971,6 +6988,10 @@
           "value": "false"
         }
       ]
+    },
+    "nil_literal": {
+      "type": "STRING",
+      "value": "nil"
     },
     "comment": {
       "type": "CHOICE",
@@ -7246,6 +7267,10 @@
     [
       "expression_statement",
       "throw_expression"
+    ],
+    [
+      "_non_delim_token",
+      "nil_literal"
     ]
   ],
   "precedences": [],
@@ -7257,10 +7282,6 @@
     {
       "type": "SYMBOL",
       "name": "_template_chars"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "raw_string_literal"
     },
     {
       "type": "SYMBOL",

@@ -159,9 +159,13 @@
     "${" @punctuation.special
      "}" @punctuation.special) @embedded
 
-(boolean_literal) @constant.builtin
-(integer_literal) @constant.builtin
-(float_literal) @constant.builtin
+[
+    (bool_literal)
+    (integer_literal)
+    (float_literal)
+    (nil_literal)
+] @constant.builtin
+
 
 (escape_sequence) @escape
 
