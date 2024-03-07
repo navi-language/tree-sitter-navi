@@ -19,9 +19,17 @@ fn foo<T>(x: T?): string? {}
 
 let a = add(99, 0.00000212, "Hello", 1, 2);
 
+fn hello(): int? throws IoError, ValueError {
+    return 1;
+}
+
+fn hello() throws IoError, ValueError {
+    return 1;
+}
+
 --------------------------------------------------------------------------------
 
-    (source_file
+  (source_file
       (function_item
         (identifier)
         (parameters)
@@ -90,7 +98,28 @@ let a = add(99, 0.00000212, "Hello", 1, 2);
             (string_literal
               (string_fragment))
             (integer_literal)
-            (integer_literal)))))
+            (integer_literal))))
+      (function_item
+        (identifier)
+        (parameters)
+        (primitive_type)
+        (throws
+          (type_identifier)
+          (type_identifier))
+        (block
+          (expression_statement
+            (return_expression
+              (integer_literal)))))
+      (function_item
+        (identifier)
+        (parameters)
+        (throws
+          (type_identifier)
+          (type_identifier))
+        (block
+          (expression_statement
+            (return_expression
+              (integer_literal))))))
 
 ================================================================================
 Variable declarations
@@ -301,7 +330,7 @@ bench "hello" {
         (assert_expression
             (integer_literal)
             (integer_literal)))))
-    (test_item
+    (bench_item
     (string_literal
         (string_fragment))
     (block
@@ -469,6 +498,7 @@ fn test(named_values: <string, int?>): <string, int?> {
     (map_type
         (primitive_type)
         (primitive_type))
+    (throws)
     (block))
     (function_item
     (identifier)

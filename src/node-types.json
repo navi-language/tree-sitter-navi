@@ -12,6 +12,10 @@
         "named": true
       },
       {
+        "type": "bench_item",
+        "named": true
+      },
+      {
         "type": "const_item",
         "named": true
       },
@@ -636,6 +640,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "bench_item",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1772,9 +1802,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "throws",
+          "named": true
+        },
         {
           "type": "visibility_modifier",
           "named": true
@@ -3252,17 +3286,17 @@
             "named": true
           }
         ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3278,6 +3312,26 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "throws",
+    "named": true,
+    "fields": {
+      "error_types": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

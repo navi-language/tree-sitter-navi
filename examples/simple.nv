@@ -53,7 +53,10 @@ fn querystring(obj: value.Value? = nil): string {
     return queries.join("&");
 }
 
-pub fn send_request(path: string, payload: value.Value): value.Value? {
+type MyError = string;
+type MyError2 = string;
+
+pub fn send_request(path: string, payload: value.Value): value.Value? throws MyError, MyError2 {
     let headers = Headers.new();
     headers.set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 

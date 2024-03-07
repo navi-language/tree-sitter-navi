@@ -145,6 +145,7 @@ module.exports = grammar({
         $.let_declaration,
         $.use_declaration,
         $.test_item,
+        $.bench_item,
       ),
 
     // Matches non-delimiter tokens common to both macro invocations and
@@ -335,14 +336,17 @@ module.exports = grammar({
         optional(
           choice(
             // : int throws
-            seq(":", field("return_type", $._option_type), optional("throws")),
-            // throws
-            seq("throws"),
+            seq(":", field("return_type", $._option_type), optional($.throws)),
+            // throws ErrorType1, ErrorType2
+            $.throws,
           ),
         ),
         // {}
         field("body", $.block),
       ),
+
+    throws: ($) =>
+      seq("throws", field("error_types", optional(sepBy(",", $._type)))),
 
     function_signature_item: ($) =>
       seq(
@@ -377,7 +381,10 @@ module.exports = grammar({
       ),
 
     test_item: ($) =>
-      seq(choice("test", "bench"), $.string_literal, field("body", $.block)),
+      seq("test", field("name", $.string_literal), field("body", $.block)),
+
+    bench_item: ($) =>
+      seq("bench", field("name", $.string_literal), field("body", $.block)),
 
     impl_item: ($) =>
       seq(
