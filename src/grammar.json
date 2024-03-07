@@ -1535,8 +1535,8 @@
                       "type": "CHOICE",
                       "members": [
                         {
-                          "type": "STRING",
-                          "value": "throws"
+                          "type": "SYMBOL",
+                          "name": "throws"
                         },
                         {
                           "type": "BLANK"
@@ -1546,13 +1546,8 @@
                   ]
                 },
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "throws"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "throws"
                 }
               ]
             },
@@ -1733,27 +1728,11 @@
           "value": "impl"
         },
         {
-          "type": "FIELD",
-          "name": "type_parameters",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "type_parameters"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "for"
+              "type": "SYMBOL",
+              "name": "impl_interface"
             },
             {
               "type": "BLANK"
@@ -1784,6 +1763,19 @@
               "value": ";"
             }
           ]
+        }
+      ]
+    },
+    "impl_interface": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_type"
+        },
+        {
+          "type": "STRING",
+          "value": "for"
         }
       ]
     },

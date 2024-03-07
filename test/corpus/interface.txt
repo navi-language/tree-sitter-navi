@@ -1,0 +1,84 @@
+================================================================================
+Interface Declaration
+================================================================================
+
+interface MyRead {
+    pub fn read(self): Bytes throws IoError;
+
+    pub fn read_to_end(self): Bytes throws IoError {
+        // This is default implementation
+    }
+}
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (interface_item
+        (type_identifier)
+        (declaration_list
+          (function_signature_item
+            (visibility_modifier)
+            (identifier)
+            (parameters
+              (self_parameter
+                (self)))
+            (type_identifier)
+            (throws
+              (type_identifier)))
+          (function_item
+            (visibility_modifier)
+            (identifier)
+            (parameters
+              (self_parameter
+                (self)))
+            (type_identifier)
+            (throws
+              (type_identifier))
+            (block
+              (line_comment))))))
+
+================================================================================
+Impl Declaration
+================================================================================
+
+impl File {
+    pub fn new(): File {
+        // Implementation
+    }
+}
+
+impl Read for File {
+    pub fn read(self): Bytes throws IoError {
+        // Implementation
+    }
+}
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (impl_item
+        (type_identifier)
+        (declaration_list
+          (function_item
+            (visibility_modifier)
+            (identifier)
+            (parameters)
+            (type_identifier)
+            (block
+              (line_comment)))))
+      (impl_item
+        (impl_interface
+          (type_identifier))
+        (type_identifier)
+        (declaration_list
+          (function_item
+            (visibility_modifier)
+            (identifier)
+            (parameters
+              (self_parameter
+                (self)))
+            (type_identifier)
+            (throws
+              (type_identifier))
+            (block
+              (line_comment))))))

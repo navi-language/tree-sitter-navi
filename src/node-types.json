@@ -1870,9 +1870,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "throws",
+          "named": true
+        },
         {
           "type": "visibility_modifier",
           "named": true
@@ -2097,6 +2101,21 @@
     }
   },
   {
+    "type": "impl_interface",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "impl_item",
     "named": true,
     "fields": {
@@ -2119,17 +2138,17 @@
             "named": true
           }
         ]
-      },
-      "type_parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_parameters",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "impl_interface",
+          "named": true
+        }
+      ]
     }
   },
   {

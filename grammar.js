@@ -357,8 +357,8 @@ module.exports = grammar({
         field("parameters", $.parameters),
         optional(
           choice(
-            seq(":", field("return_type", $._option_type), optional("throws")),
-            seq("throws"),
+            seq(":", field("return_type", $._option_type), optional($.throws)),
+            $.throws,
           ),
         ),
         ";",
@@ -389,11 +389,12 @@ module.exports = grammar({
     impl_item: ($) =>
       seq(
         "impl",
-        field("type_parameters", optional($.type_parameters)),
-        optional("for"),
+        optional($.impl_interface),
         field("type", $._type),
         choice(field("body", $.declaration_list), ";"),
       ),
+
+    impl_interface: ($) => seq($._type, "for"),
 
     interface_item: ($) =>
       seq(
