@@ -389,12 +389,22 @@ module.exports = grammar({
     impl_item: ($) =>
       seq(
         "impl",
-        optional($.impl_interface),
+        optional(
+          seq(
+            field(
+              "interface",
+              choice(
+                $._type_identifier,
+                $.scoped_type_identifier,
+                $.generic_type,
+              ),
+            ),
+            "for",
+          ),
+        ),
         field("type", $._type),
         choice(field("body", $.declaration_list), ";"),
       ),
-
-    impl_interface: ($) => seq($._type, "for"),
 
     interface_item: ($) =>
       seq(

@@ -2101,21 +2101,6 @@
     }
   },
   {
-    "type": "impl_interface",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "impl_item",
     "named": true,
     "fields": {
@@ -2125,6 +2110,24 @@
         "types": [
           {
             "type": "declaration_list",
+            "named": true
+          }
+        ]
+      },
+      "interface": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "scoped_type_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
             "named": true
           }
         ]
@@ -2139,16 +2142,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "impl_interface",
-          "named": true
-        }
-      ]
     }
   },
   {

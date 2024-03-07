@@ -1731,8 +1731,34 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "impl_interface"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "interface",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_type_identifier"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "scoped_type_identifier"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "generic_type"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": "for"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -1763,19 +1789,6 @@
               "value": ";"
             }
           ]
-        }
-      ]
-    },
-    "impl_interface": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_type"
-        },
-        {
-          "type": "STRING",
-          "value": "for"
         }
       ]
     },

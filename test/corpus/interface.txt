@@ -67,8 +67,7 @@ impl Read for File {
             (block
               (line_comment)))))
       (impl_item
-        (impl_interface
-          (type_identifier))
+        (type_identifier)
         (type_identifier)
         (declaration_list
           (function_item
@@ -81,4 +80,5 @@ impl Read for File {
             (throws
               (type_identifier))
             (block
-              (line_comment))))))
+              (line_comment)))))
+)

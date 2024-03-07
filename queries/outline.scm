@@ -18,7 +18,7 @@
 
 (impl_item
     "impl" @context
-    trait: (_)? @name
+    interface: (_)? @name
     "for"? @context
     type: (_) @name) @item
 
