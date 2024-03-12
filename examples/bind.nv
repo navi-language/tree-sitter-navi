@@ -30,6 +30,8 @@ fn convert_bind_value(value: BindValue?): _BindValue {
                 return _BindValue.from_int_array(val);
             case [float]:
                 return _BindValue.from_float_array(val);
+            default:
+                return _BindValue.null();
         }
     } else {
         return _BindValue.null();

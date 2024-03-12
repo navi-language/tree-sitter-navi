@@ -1071,9 +1071,7 @@ module.exports = grammar({
       prec.right(
         seq(
           "if",
-          "(",
-          field("condition", $._condition),
-          ")",
+          field("condition", seq("(", $._condition, ")")),
           field("consequence", $.block),
           optional(field("alternative", $.else_clause)),
         ),
@@ -1107,27 +1105,35 @@ module.exports = grammar({
     switch_expression: ($) =>
       seq(
         "switch",
-        field("value", $._expression),
+        field("condition", seq("(", $._condition, ")")),
         field("body", $.switch_block),
       ),
 
     switch_block: ($) =>
-      seq("{", optional(seq(repeat($.switch_case_arm))), "}"),
+      seq(
+        "{",
+        optional(seq(repeat($.switch_case_arm))),
+        optional($.switch_default_arm),
+        "}",
+      ),
 
     switch_case_arm: ($) =>
       prec.right(
         seq(
-          choice(seq("case", field("pattern", $._pattern)), "default"),
+          seq("case", field("pattern", $._pattern)),
           ":",
           field("value", $.expression_statement),
         ),
       ),
 
+    switch_default_arm: ($) =>
+      prec.right(seq("default", ":", field("value", $.expression_statement))),
+
     while_expression: ($) =>
       seq(
         optional(seq($.label, ":")),
         "while",
-        field("condition", $._condition),
+        field("condition", seq("(", $._condition, ")")),
         field("body", $.block),
       ),
 

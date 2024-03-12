@@ -2071,9 +2071,17 @@
         ]
       },
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "_expression",
             "named": true
@@ -3229,6 +3237,10 @@
         {
           "type": "switch_case_arm",
           "named": true
+        },
+        {
+          "type": "switch_default_arm",
+          "named": true
         }
       ]
     }
@@ -3239,7 +3251,7 @@
     "fields": {
       "pattern": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "_pattern",
@@ -3247,6 +3259,22 @@
           }
         ]
       },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression_statement",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "switch_default_arm",
+    "named": true,
+    "fields": {
       "value": {
         "multiple": false,
         "required": true,
@@ -3273,12 +3301,28 @@
           }
         ]
       },
-      "value": {
-        "multiple": false,
+      "condition": {
+        "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
             "type": "_expression",
+            "named": true
+          },
+          {
+            "type": "let_chain",
+            "named": true
+          },
+          {
+            "type": "let_condition",
             "named": true
           }
         ]
@@ -3926,9 +3970,17 @@
         ]
       },
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "_expression",
             "named": true

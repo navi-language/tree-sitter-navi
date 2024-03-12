@@ -1,0 +1,103 @@
+================================================================================
+Switch
+================================================================================
+let s: string? = nil;
+
+switch (a) {
+  case 1:
+    s = "a is 1";
+  case 2: {
+    s = "a is 2";
+  }
+  default:
+    s = "a is neither 1 nor 2";
+}
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (let_declaration
+        (identifier)
+        (primitive_type)
+        (nil_literal))
+      (expression_statement
+        (switch_expression
+          (identifier)
+          (switch_block
+            (switch_case_arm
+              (integer_literal)
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (string_literal
+                    (string_fragment)))))
+            (switch_case_arm
+              (integer_literal)
+              (expression_statement
+                (block
+                  (expression_statement
+                    (assignment_expression
+                      (identifier)
+                      (string_literal
+                        (string_fragment)))))))
+            (switch_default_arm
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (string_literal
+                    (string_fragment)))))))))
+
+================================================================================
+Switch Let
+================================================================================
+
+let s: string? = nil;
+
+switch (let t = writer.(type)) {
+case std.fs.File:
+    s = "File";
+case Response:
+    s = "Response";
+default:
+    s = "Unknown";
+}
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (let_declaration
+        (identifier)
+        (primitive_type)
+        (nil_literal))
+      (expression_statement
+        (switch_expression
+          (let_condition
+            (identifier)
+            (field_expression
+              (identifier)
+              (type_assertion)))
+          (switch_block
+            (switch_case_arm
+              (scoped_identifier
+                (scoped_identifier
+                  (identifier)
+                  (identifier))
+                (identifier))
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (string_literal
+                    (string_fragment)))))
+            (switch_case_arm
+              (identifier)
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (string_literal
+                    (string_fragment)))))
+            (switch_default_arm
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (string_literal
+                    (string_fragment)))))))))

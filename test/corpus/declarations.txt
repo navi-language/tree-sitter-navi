@@ -213,58 +213,6 @@ struct User {
         (primitive_type)))))
 
 ================================================================================
-Switch statement
-================================================================================
-let a = "foo";
-switch (x) {
-    case 1:
-        let a = "one";
-    case 2: {
-        let a = "two";
-    }
-    default:
-        let a = "default";
-}
-
---------------------------------------------------------------------------------
-
-(source_file
-  (let_declaration
-    (identifier)
-    (string_literal
-      (string_fragment)))
-  (expression_statement
-    (switch_expression
-      (parenthesized_expression
-        (identifier))
-      (switch_block
-        (switch_case_arm
-          (integer_literal)
-          (expression_statement
-            (assignment_expression
-              (identifier)
-              (ERROR
-                (identifier))
-              (string_literal
-                (string_fragment)))))
-        (switch_case_arm
-          (integer_literal)
-          (expression_statement
-            (block
-              (let_declaration
-                (identifier)
-                (string_literal
-                  (string_fragment))))))
-        (switch_case_arm
-          (expression_statement
-            (assignment_expression
-              (identifier)
-              (ERROR
-                (identifier))
-              (string_literal
-                (string_fragment)))))))))
-
-================================================================================
 String interpolation
 ================================================================================
 
