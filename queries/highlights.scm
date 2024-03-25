@@ -1,10 +1,7 @@
 ; Identifiers
-
 (type_identifier) @type
 (primitive_type) @type.builtin
 (field_identifier) @property
-
-; Identifier conventions
 
 ; Assume all-caps names are constants
 ((identifier) @constant
@@ -38,7 +35,6 @@
     name: (type_identifier) @constructor))
 
 ; Function calls
-
 (call_expression
   function: (identifier) @function)
 (call_expression
@@ -60,12 +56,10 @@
     field: (field_identifier) @function.method))
 
 ; Function definitions
-
 (function_item (identifier) @function)
 (function_signature_item (identifier) @function)
 
 ; Other identifiers
-
 (line_comment) @comment
 (block_comment) @comment
 
@@ -140,13 +134,13 @@
   "type"
   "use"
   "while"
+  "panic"
 ] @keyword
 
 (self) @variable.builtin
 (use_list (self) @keyword)
 (scoped_use_list (self) @keyword)
 (scoped_identifier (self) @keyword)
-
 
 [
     (char_literal)
@@ -165,7 +159,6 @@
     (float_literal)
     (nil_literal)
 ] @constant.builtin
-
 
 (escape_sequence) @escape
 

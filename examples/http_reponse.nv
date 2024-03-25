@@ -4,6 +4,12 @@ use std.testing.assert_throws;
 
 use test_harness;
 
+test "panic" {
+    if (1 == 2) {
+        panic "Hello";
+    }
+}
+
 test "new_response" {
     let headers = Headers.new();
     headers.set("Content-Type", "application/json");
