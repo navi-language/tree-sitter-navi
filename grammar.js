@@ -69,7 +69,6 @@ module.exports = grammar({
 
   supertypes: ($) => [
     $._expression,
-    $._type,
     $._literal,
     $._literal_pattern,
     $._declaration_statement,
@@ -91,19 +90,22 @@ module.exports = grammar({
     // Local ambiguity due to anonymous types:
     // See https://internals.rust-lang.org/t/pre-rfc-deprecating-anonymous-parameters/3710
     [$._option_type],
-    [$._type, $._pattern],
+    [$._option_type, $._type],
+    [$.union_type],
+    [$.union_type, $._type],
+    [$._base_type, $._pattern],
     [$.closure_type, $.tuple_pattern],
     [$.unit_type, $.tuple_pattern],
     [$.scoped_identifier, $.scoped_type_identifier],
     [$.parameters, $._pattern],
     [$.array_expression],
     [$.scoped_identifier, $._expression_except_range],
-    [$._type, $.scoped_identifier],
-    [$._type, $.scoped_identifier, $.scoped_type_identifier],
-    [$._type, $.scoped_type_identifier],
+    [$._base_type, $.scoped_identifier],
+    [$._base_type, $.scoped_identifier, $.scoped_type_identifier],
+    [$._base_type, $.scoped_type_identifier],
     [$.expression_statement, $.switch_case_arm],
     [$.union_type, $.type_item],
-    [$._type, $._expression_except_range],
+    [$._base_type, $._expression_except_range],
     [$.array_expression, $.block],
     [$.map_expression, $.block],
     [$.assignment_expression, $.assert_expression],
@@ -210,7 +212,7 @@ module.exports = grammar({
 
     inner_attribute_item: ($) => seq("#", "!", "[", $.attribute, "]"),
 
-    _option_type: ($) => seq($._type, optional("?")),
+    _option_type: ($) => seq($._base_type, optional("?")),
 
     unwrap_expression: ($) => seq($._expression, token("!")),
 
@@ -278,7 +280,7 @@ module.exports = grammar({
         optional($.visibility_modifier),
         field("name", $._field_identifier),
         ":",
-        field("type", $._option_type),
+        field("type", $._type),
         optional(seq("=", field("value", $._expression))),
       ),
 
@@ -290,7 +292,7 @@ module.exports = grammar({
           seq(
             repeat($.attribute_item),
             optional($.visibility_modifier),
-            field("type", $._option_type),
+            field("type", $._type),
           ),
         ),
         optional(","),
@@ -303,7 +305,7 @@ module.exports = grammar({
         "const",
         field("name", $.identifier),
         ":",
-        field("type", $._option_type),
+        field("type", $._type),
         optional(seq("=", field("value", $._expression))),
         ";",
       ),
@@ -315,11 +317,14 @@ module.exports = grammar({
         field("name", $._type_identifier),
         // field("type_parameters", optional($.type_parameters)),
         "=",
-        field("type", choice($.union_type, $._option_type)),
+        field("type", $._type),
         ";",
       ),
 
-    union_type: ($) => seq($._option_type, optional(seq("|", $.union_type))),
+    union_type: ($) =>
+      seq($._option_type, "|", optional(sepBy("|", $._option_type))),
+
+    _type: ($) => choice($._option_type, $.union_type),
 
     function_item: ($) =>
       seq(
@@ -336,7 +341,7 @@ module.exports = grammar({
         optional(
           choice(
             // : int throws
-            seq(":", field("return_type", $._option_type), optional($.throws)),
+            seq(":", field("return_type", $._type), optional($.throws)),
             // throws ErrorType1, ErrorType2
             $.throws,
           ),
@@ -357,7 +362,7 @@ module.exports = grammar({
         field("parameters", $.parameters),
         optional(
           choice(
-            seq(":", field("return_type", $._option_type), optional($.throws)),
+            seq(":", field("return_type", $._type), optional($.throws)),
             $.throws,
           ),
         ),
@@ -368,12 +373,12 @@ module.exports = grammar({
       seq(
         "|",
         "(",
-        optional(sepBy(",", $._option_type)),
+        optional(sepBy(",", $._type)),
         ")",
 
         optional(
           choice(
-            seq(":", field("return_type", $._option_type), optional("throws")),
+            seq(":", field("return_type", $._type), optional("throws")),
             "throws",
           ),
         ),
@@ -430,7 +435,7 @@ module.exports = grammar({
         sepBy1(
           "+",
           choice(
-            $._option_type,
+            $._type,
             $.lifetime,
             $.higher_ranked_trait_bound,
             $.removed_trait_bound,
@@ -445,7 +450,7 @@ module.exports = grammar({
         field("type", $._type),
       ),
 
-    removed_trait_bound: ($) => seq("?", $._option_type),
+    removed_trait_bound: ($) => seq("?", $._type),
 
     type_parameters: ($) =>
       prec(
@@ -469,12 +474,7 @@ module.exports = grammar({
       ),
 
     const_parameter: ($) =>
-      seq(
-        "const",
-        field("name", $.identifier),
-        ":",
-        field("type", $._option_type),
-      ),
+      seq("const", field("name", $.identifier), ":", field("type", $._type)),
 
     constrained_type_parameter: ($) =>
       seq(
@@ -494,7 +494,7 @@ module.exports = grammar({
         "let",
         // optional($.mutable_specifier),
         field("pattern", $._pattern),
-        optional(seq(":", field("type", $._option_type))),
+        optional(seq(":", field("type", $._type))),
         optional(seq("=", field("value", $._expression))),
         // optional(seq("else", field("alternative", $.block))),
         ";",
@@ -540,7 +540,7 @@ module.exports = grammar({
               $.parameter,
               $.self_parameter,
               "_",
-              // $._option_type,
+              // $._type,
             ),
           ),
         ),
@@ -564,11 +564,11 @@ module.exports = grammar({
         ":",
         choice(
           seq(
-            field("type", $._option_type),
+            field("type", $._type),
             // = default_value
             optional(seq("=", field("default", $._expression))),
           ),
-          seq("..", field("type", $._option_type)),
+          seq("..", field("type", $._type)),
         ),
       ),
 
@@ -576,45 +576,31 @@ module.exports = grammar({
 
     // Section - Types
 
-    _type: ($) =>
+    _base_type: ($) =>
       choice(
-        // $.abstract_type,
-        // $.reference_type,
         $.metavariable,
         $.pointer_type,
         $.generic_type,
         $.scoped_type_identifier,
-        // $.tuple_type,
-        // $.unit_type,
         $.array_type,
         $.map_type,
         $.function_type,
         $._type_identifier,
         $.closure_type,
-        // $.macro_invocation,
-        // $.empty_type,
-        // $.bounded_type,
         alias(choice(...primitive_types), $.primitive_type),
       ),
 
-    bracketed_type: ($) =>
-      seq("<", choice($._option_type, $.qualified_type), ">"),
+    bracketed_type: ($) => seq("<", choice($._type, $.qualified_type), ">"),
 
     qualified_type: ($) =>
-      seq(field("type", $._option_type), "as", field("alias", $._option_type)),
+      seq(field("type", $._type), "as", field("alias", $._type)),
 
     lifetime: ($) => seq("'", $.identifier),
 
-    array_type: ($) => seq("[", field("element", $._option_type), "]"),
+    array_type: ($) => seq("[", field("element", $._type), "]"),
 
     map_type: ($) =>
-      seq(
-        "<",
-        field("key", $._option_type),
-        ",",
-        field("value", $._option_type),
-        ">",
-      ),
+      seq("<", field("key", $._type), ",", field("value", $._type), ">"),
 
     function_type: ($) =>
       seq(
@@ -631,11 +617,10 @@ module.exports = grammar({
             field("parameters", $.parameters),
           ),
         ),
-        optional(seq("->", field("return_type", $._option_type))),
+        optional(seq("->", field("return_type", $._type))),
       ),
 
-    tuple_type: ($) =>
-      seq("(", sepBy1(",", $._option_type), optional(","), ")"),
+    tuple_type: ($) => seq("(", sepBy1(",", $._type), optional(","), ")"),
 
     unit_type: (_) => seq("(", ")"),
 
@@ -679,9 +664,9 @@ module.exports = grammar({
       prec.left(
         -1,
         choice(
-          seq($.lifetime, "+", $._option_type),
-          seq($._type, "+", $._option_type),
-          seq($._type, "+", $.lifetime),
+          seq($.lifetime, "+", $._type),
+          seq($._base_type, "+", $._type),
+          seq($._base_type, "+", $.lifetime),
         ),
       ),
 
@@ -690,13 +675,7 @@ module.exports = grammar({
         token(prec(1, "<")),
         sepBy1(
           ",",
-          choice(
-            $._option_type,
-            $.type_binding,
-            $.lifetime,
-            $._literal,
-            $.block,
-          ),
+          choice($._type, $.type_binding, $.lifetime, $._literal, $.block),
         ),
         optional(","),
         ">",
@@ -707,7 +686,7 @@ module.exports = grammar({
         field("name", $._type_identifier),
         field("type_arguments", optional($.type_arguments)),
         "=",
-        field("type", $._option_type),
+        field("type", $._type),
       ),
 
     reference_type: ($) =>
@@ -715,15 +694,11 @@ module.exports = grammar({
         "&",
         optional($.lifetime),
         optional($.mutable_specifier),
-        field("type", $._option_type),
+        field("type", $._type),
       ),
 
     pointer_type: ($) =>
-      seq(
-        "*",
-        choice("const", $.mutable_specifier),
-        field("type", $._option_type),
-      ),
+      seq("*", choice("const", $.mutable_specifier), field("type", $._type)),
 
     empty_type: (_) => "!",
 
@@ -938,12 +913,12 @@ module.exports = grammar({
         ),
       ),
 
-    type_assertion: ($) => seq("(", choice("type", $._option_type), ")"),
+    type_assertion: ($) => seq("(", choice("type", $._type), ")"),
 
     type_cast_expression: ($) =>
       prec.left(
         PREC.cast,
-        seq(field("value", $._expression), "as", field("type", $._option_type)),
+        seq(field("value", $._expression), "as", field("type", $._type)),
       ),
 
     return_expression: ($) =>

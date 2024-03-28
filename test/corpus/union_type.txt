@@ -1,0 +1,73 @@
+================================================================================
+Union Type
+================================================================================
+
+pub type BindValue = int | string | bool | float | DateTime? | Duration | [string] | [int] | [float] | <string, int>;
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (type_item
+        (visibility_modifier)
+        (type_identifier)
+        (union_type
+          (primitive_type)
+          (primitive_type)
+          (primitive_type)
+          (primitive_type)
+          (type_identifier)
+          (type_identifier)
+          (array_type
+            (primitive_type))
+          (array_type
+            (primitive_type))
+          (array_type
+            (primitive_type))
+          (map_type
+            (primitive_type)
+            (primitive_type)))))
+
+================================================================================
+Map Array with Union Type
+================================================================================
+
+pub type MyMap = <string, string | int | boolean>;
+pub type MyMapArray = <string, [string | int | boolean]>;
+pub type MyMapMapArray = <string, <int | string, [string | int | boolean]>>;
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (type_item
+        (visibility_modifier)
+        (type_identifier)
+        (map_type
+          (primitive_type)
+          (union_type
+            (primitive_type)
+            (primitive_type)
+            (type_identifier))))
+      (type_item
+        (visibility_modifier)
+        (type_identifier)
+        (map_type
+          (primitive_type)
+          (array_type
+            (union_type
+              (primitive_type)
+              (primitive_type)
+              (type_identifier)))))
+      (type_item
+        (visibility_modifier)
+        (type_identifier)
+        (map_type
+          (primitive_type)
+          (map_type
+            (union_type
+              (primitive_type)
+              (primitive_type))
+            (array_type
+              (union_type
+                (primitive_type)
+                (primitive_type)
+                (type_identifier)))))))

@@ -319,40 +319,6 @@ throw "error";
         (string_fragment)))))
 
 ================================================================================
-Union type
-================================================================================
-
-pub type BindValue = int | string | bool | float | DateTime | Duration | [string] | [int] | [float];
-
---------------------------------------------------------------------------------
-
-(source_file
-    (type_item
-    (visibility_modifier)
-    (type_identifier)
-    (union_type
-        (primitive_type)
-        (union_type
-        (primitive_type)
-        (union_type
-            (primitive_type)
-            (union_type
-            (primitive_type)
-            (union_type
-                (type_identifier)
-                (union_type
-                (type_identifier)
-                (union_type
-                    (array_type
-                    (primitive_type))
-                    (union_type
-                    (array_type
-                        (primitive_type))
-                    (union_type
-                        (array_type
-                        (primitive_type)))))))))))))
-
-================================================================================
 If let & For let
 ================================================================================
 

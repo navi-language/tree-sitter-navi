@@ -6,6 +6,7 @@ use _sql.BindValue as _BindValue;
 
 /// A union type for query binding values.
 pub type BindValue = int | string | bool | float | DateTime | Duration | [string] | [int] | [float];
+pub type NamedBindValue = <string, <string, BindValue? | float? | bool | [string] | any>>;
 
 pub const STATEMENT_TYPE_SELECT: string = `Hello ${DateTime.now() - 100.day()}`;
 
