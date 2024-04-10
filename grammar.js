@@ -187,6 +187,7 @@ module.exports = grammar({
         "if",
         "impl",
         "interface",
+        "is",
         "let",
         "loop",
         "nil",

@@ -1,7 +1,10 @@
 ; Identifiers
+
 (type_identifier) @type
 (primitive_type) @type.builtin
 (field_identifier) @property
+
+; Identifier conventions
 
 ; Assume all-caps names are constants
 ((identifier) @constant
@@ -35,6 +38,7 @@
     name: (type_identifier) @constructor))
 
 ; Function calls
+
 (call_expression
   function: (identifier) @function)
 (call_expression
@@ -56,10 +60,12 @@
     field: (field_identifier) @function.method))
 
 ; Function definitions
+
 (function_item (identifier) @function)
 (function_signature_item (identifier) @function)
 
 ; Other identifiers
+
 (line_comment) @comment
 (block_comment) @comment
 
@@ -118,8 +124,10 @@
   "impl"
   "in"
   "interface"
+  "is"
   "let"
   "loop"
+  "panic"
   "pub"
   "return"
   "select"
@@ -134,10 +142,9 @@
   "type"
   "use"
   "while"
-  "panic"
 ] @keyword
 
-(self) @variable.builtin
+(self) @variable.special
 (use_list (self) @keyword)
 (scoped_use_list (self) @keyword)
 (scoped_identifier (self) @keyword)
@@ -155,10 +162,13 @@
 
 [
     (bool_literal)
-    (integer_literal)
-    (float_literal)
     (nil_literal)
 ] @constant.builtin
+
+[
+    (integer_literal)
+    (float_literal)
+] @number
 
 (escape_sequence) @escape
 
@@ -171,4 +181,4 @@
   "'"
   "?"
   "!"
-] @operator
+] @punctuation.delimiter
