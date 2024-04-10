@@ -3,6 +3,7 @@ Union Type
 ================================================================================
 
 pub type BindValue = int | string | bool | float | DateTime? | Duration | [string] | [int] | [float] | <string, int>;
+pub type alias MyNum = int | float;
 
 --------------------------------------------------------------------------------
 
@@ -25,7 +26,13 @@ pub type BindValue = int | string | bool | float | DateTime? | Duration | [strin
             (primitive_type))
           (map_type
             (primitive_type)
-            (primitive_type)))))
+            (primitive_type))))
+      (type_item
+        (visibility_modifier)
+        (type_identifier)
+        (union_type
+          (primitive_type)
+          (primitive_type))))
 
 ================================================================================
 Map Array with Union Type

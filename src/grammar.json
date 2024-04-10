@@ -301,6 +301,10 @@
         },
         {
           "type": "STRING",
+          "value": "alias"
+        },
+        {
+          "type": "STRING",
           "value": "as"
         },
         {
@@ -390,6 +394,10 @@
         {
           "type": "STRING",
           "value": "interface"
+        },
+        {
+          "type": "STRING",
+          "value": "is"
         },
         {
           "type": "STRING",
@@ -1214,6 +1222,18 @@
         {
           "type": "STRING",
           "value": "type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "alias"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",

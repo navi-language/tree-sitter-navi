@@ -164,6 +164,7 @@ module.exports = grammar({
         alias(choice(...primitive_types), $.primitive_type),
         prec.right(repeat1(choice(...TOKEN_TREE_NON_SPECIAL_TOKENS))),
         "'",
+        "alias",
         "as",
         "assert",
         "assert_eq",
@@ -315,6 +316,7 @@ module.exports = grammar({
       seq(
         optional($.visibility_modifier),
         "type",
+        optional("alias"),
         field("name", $._type_identifier),
         // field("type_parameters", optional($.type_parameters)),
         "=",

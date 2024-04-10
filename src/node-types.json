@@ -5297,6 +5297,10 @@
     "named": false
   },
   {
+    "type": "alias",
+    "named": false
+  },
+  {
     "type": "as",
     "named": false
   },
@@ -5422,6 +5426,10 @@
   },
   {
     "type": "interface",
+    "named": false
+  },
+  {
+    "type": "is",
     "named": false
   },
   {

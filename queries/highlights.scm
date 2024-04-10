@@ -102,6 +102,7 @@
 (parameter (identifier) @variable.parameter)
 
 [
+  "alias"
   "as"
   "assert"
   "assert_eq"
