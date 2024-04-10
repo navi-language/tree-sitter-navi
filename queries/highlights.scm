@@ -48,7 +48,7 @@
   function: (scoped_identifier
     "."
     name: (identifier) @function))
-(keyword_argument key: (identifier) @variable.parameter)
+(keyword_argument key: (identifier) @attribute)
 
 (generic_function
   function: (identifier) @function)
