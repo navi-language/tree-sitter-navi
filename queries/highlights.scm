@@ -181,4 +181,4 @@
   "'"
   "?"
   "!"
-] @punctuation.delimiter
+] @operator
