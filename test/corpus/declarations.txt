@@ -127,42 +127,52 @@ Variable declarations
 
 let x: int = 5;
 const API_HOST: string = "https://api.example.com";
+const a = 5;
 let a = [string] { "Foo", "Bar" };
 let b = <string, int> { "Foo": 1, "Bar": 2 };
+let c: string = `foo`;
 
 --------------------------------------------------------------------------------
 
-(source_file
-    (let_declaration
-    (identifier)
-    (primitive_type)
-    (integer_literal))
-    (const_item
-    (identifier)
-    (primitive_type)
-    (string_literal
-        (string_fragment)))
-    (let_declaration
-    (identifier)
-    (array_expression
-        (array_type
-        (primitive_type))
-        (string_literal
-        (string_fragment))
-        (string_literal
-        (string_fragment))))
-    (let_declaration
-    (identifier)
-    (map_expression
-        (map_type
+    (source_file
+      (let_declaration
+        (identifier)
         (primitive_type)
-        (primitive_type))
+        (integer_literal))
+      (const_item
+        (identifier)
+        (primitive_type)
         (string_literal
-        (string_fragment))
-        (integer_literal)
-        (string_literal
-        (string_fragment))
-        (integer_literal))))
+          (string_fragment)))
+      (const_item
+        (identifier)
+        (integer_literal))
+      (let_declaration
+        (identifier)
+        (array_expression
+          (array_type
+            (primitive_type))
+          (string_literal
+            (string_fragment))
+          (string_literal
+            (string_fragment))))
+      (let_declaration
+        (identifier)
+        (map_expression
+          (map_type
+            (primitive_type)
+            (primitive_type))
+          (string_literal
+            (string_fragment))
+          (integer_literal)
+          (string_literal
+            (string_fragment))
+          (integer_literal)))
+      (let_declaration
+        (identifier)
+        (primitive_type)
+        (string_template
+          (string_fragment))))
 
 ================================================================================
 Use

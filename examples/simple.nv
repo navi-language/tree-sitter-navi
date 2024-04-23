@@ -4,7 +4,7 @@ use std.net.http.{self, Headers};
 
 use utils;
 
-const target_file = "releases.md";
+const target_file: string = "releases.md";
 const repo = "navi-language/navi";
 const page_size = 200;
 
