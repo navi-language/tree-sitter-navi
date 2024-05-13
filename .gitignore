@@ -4,3 +4,4 @@ build
 *.log
 /target/
 *.wasm
+.DS_Store

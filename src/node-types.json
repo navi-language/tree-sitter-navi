@@ -410,14 +410,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_expression",
-          "named": true
-        },
-        {
-          "type": "array_type",
           "named": true
         }
       ]
@@ -2843,14 +2839,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "_expression",
-          "named": true
-        },
-        {
-          "type": "map_type",
           "named": true
         }
       ]

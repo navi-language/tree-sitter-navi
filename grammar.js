@@ -970,20 +970,23 @@ module.exports = grammar({
 
     array_expression: ($) =>
       seq(
-        $.array_type,
-        "{",
+        "[",
         seq(sepBy(",", $._expression), optional(",")),
         optional(","),
-        "}",
+        "]",
       ),
 
     map_expression: ($) =>
-      seq(
-        $.map_type,
-        "{",
-        sepBy(",", seq($._literal, ":", $._expression)),
-        optional(","),
-        "}",
+      choice(
+        // { key: value, key: value, ...}
+        seq(
+          "{",
+          sepBy(",", seq($._literal, ":", $._expression)),
+          optional(","),
+          "}",
+        ),
+        // {:}
+        seq("{", ":", "}"),
       ),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),

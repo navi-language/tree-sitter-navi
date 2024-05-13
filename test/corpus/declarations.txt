@@ -128,8 +128,8 @@ Variable declarations
 let x: int = 5;
 const API_HOST: string = "https://api.example.com";
 const a = 5;
-let a = [string] { "Foo", "Bar" };
-let b = <string, int> { "Foo": 1, "Bar": 2 };
+let a = ["Foo", "Bar"];
+let b = { "Foo": 1, "Bar": 2 };
 let c: string = `foo`;
 
 --------------------------------------------------------------------------------
@@ -150,8 +150,6 @@ let c: string = `foo`;
       (let_declaration
         (identifier)
         (array_expression
-          (array_type
-            (primitive_type))
           (string_literal
             (string_fragment))
           (string_literal
@@ -159,9 +157,6 @@ let c: string = `foo`;
       (let_declaration
         (identifier)
         (map_expression
-          (map_type
-            (primitive_type)
-            (primitive_type))
           (string_literal
             (string_fragment))
           (integer_literal)
@@ -523,3 +518,79 @@ hello("Jason Lee", city: "Chengdu", 1, 2, 3);
             (integer_literal)
             (integer_literal)
             (integer_literal)))))
+
+================================================================================
+Map initialization
+================================================================================
+
+let a = {
+    "a": 1,
+    "b": 2,
+};
+let a: <string, string> = {:};
+let a: <string, int> = { "a": 1, "b": 2 };
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (let_declaration
+        (identifier)
+        (map_expression
+          (string_literal
+            (string_fragment))
+          (integer_literal)
+          (string_literal
+            (string_fragment))
+          (integer_literal)))
+      (let_declaration
+        (identifier)
+        (map_type
+          (primitive_type)
+          (primitive_type))
+        (map_expression))
+      (let_declaration
+        (identifier)
+        (map_type
+          (primitive_type)
+          (primitive_type))
+        (map_expression
+          (string_literal
+            (string_fragment))
+          (integer_literal)
+          (string_literal
+            (string_fragment))
+          (integer_literal))))
+
+================================================================================
+Array initialization
+================================================================================
+
+let a = [1, 2, 3];
+let b: [string] = [];
+let c: [string] = ["a", "b", "c"];
+
+--------------------------------------------------------------------------------
+
+    (source_file
+      (let_declaration
+        (identifier)
+        (array_expression
+          (integer_literal)
+          (integer_literal)
+          (integer_literal)))
+      (let_declaration
+        (identifier)
+        (array_type
+          (primitive_type))
+        (array_expression))
+      (let_declaration
+        (identifier)
+        (array_type
+          (primitive_type))
+        (array_expression
+          (string_literal
+            (string_fragment))
+          (string_literal
+            (string_fragment))
+          (string_literal
+            (string_fragment)))))
