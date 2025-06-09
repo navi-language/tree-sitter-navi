@@ -8,18 +8,22 @@
     "url": "https://github.com/navi-language/tree-sitter-navi.git"
   },
   "license": "MIT",
-  "keywords": ["parser", "navi"],
+  "keywords": [
+    "parser",
+    "navi"
+  ],
   "author": "Jason Lee <huacnlee@gmail.com>",
   "type": "commonjs",
   "devDependencies": {
-    "node-gyp": ">=7 <11",
-    "tree-sitter-cli": "^0.20.8"
+    "node-addon-api": "^8.2.2",
+    "node-gyp-build": "^4.8.2",
+    "tree-sitter-cli": "^0.25.6"
   },
   "dependencies": {
     "nan": "^2.17.0"
   },
   "scripts": {
-    "build": "tree-sitter generate && node-gyp build",
+    "build": "tree-sitter generate && node-gyp-build",
     "build-wasm": "tree-sitter build-wasm",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
@@ -31,11 +35,22 @@
     {
       "scope": "source.navi",
       "injection-regex": "navi",
-      "file-types": ["nv", "navi"],
-      "highlights": ["queries/highlights.scm"],
-      "tags": ["queries/tags.scm"],
-      "outline": ["queries/outline.scm"],
-      "brackets": ["queries/brackets.scm"]
+      "file-types": [
+        "nv",
+        "navi"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "tags": [
+        "queries/tags.scm"
+      ],
+      "outline": [
+        "queries/outline.scm"
+      ],
+      "brackets": [
+        "queries/brackets.scm"
+      ]
     }
   ]
 }
