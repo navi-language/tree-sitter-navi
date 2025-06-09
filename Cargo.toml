@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-navi"
 description = "Navi grammar for the tree-sitter parsing library"
-version = "0.2.1"
+version = "0.2.2"
 keywords = ["incremental", "parsing", "navi"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/navi-language/tree-sitter-navi"
@@ -16,6 +16,7 @@ path = "bindings/rust/lib.rs"
 
 [dependencies]
 tree-sitter = "0.25.4"
+tree-sitter-language = "0.1.5"
 
 [build-dependencies]
 cc = "1.0"
