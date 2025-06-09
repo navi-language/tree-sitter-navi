@@ -1,0 +1,29 @@
+{
+  "grammars": [
+    {
+      "name": "navi",
+      "camelcase": "Navi",
+      "scope": "source.navi",
+      "path": ".",
+      "file-types": ["navi", "nv"]
+    }
+  ],
+  "metadata": {
+    "version": "0.23.1",
+    "license": "MIT",
+    "description": "Navi grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Jason Lee",
+        "email": "huacnlee@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/navi-language/tree-sitter-navi"
+    }
+  },
+  "bindings": {
+    "node": true,
+    "rust": true
+  }
+}

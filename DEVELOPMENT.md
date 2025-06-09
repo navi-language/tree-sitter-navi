@@ -1,9 +1,10 @@
 # Development
 
-1. Update `grammar.js` and run `bun run build` to generate the parser.
-2. Run `bun run test` to run the tests.
-3. If you have update the grammar, you can write new tests in `test/` and run `bun run test` to see if they pass.
-
+1. Install Yarn
+2. Run `yarn install` to install the JavaScript dependencies.
+3. Update `grammar.js` and run `yarn run build` to generate the parser.
+4. Run `yarn run test` to run the tests.
+5. If you have update the grammar, you can write new tests in `test/` and run `yarn run test` to see if they pass.
 
 ## Preview highlighter
 

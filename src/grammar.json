@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "navi",
   "word": "identifier",
   "rules": {
@@ -7127,7 +7128,7 @@
                           },
                           {
                             "type": "PATTERN",
-                            "value": "u{[0-9a-fA-F]+}"
+                            "value": "u\\{[0-9a-fA-F]+\\}"
                           },
                           {
                             "type": "PATTERN",
@@ -7177,7 +7178,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "u{[0-9a-fA-F]+}"
+                "value": "u\\{[0-9a-fA-F]+\\}"
               },
               {
                 "type": "PATTERN",
@@ -7518,7 +7519,6 @@
   "inline": [
     "_path",
     "_type_identifier",
-    "ReferenceError",
     "_field_identifier",
     "_non_special_token",
     "_declaration_statement",
@@ -7531,6 +7531,6 @@
     "_literal_pattern",
     "_declaration_statement",
     "_pattern"
-  ]
+  ],
+  "reserved": {}
 }
-

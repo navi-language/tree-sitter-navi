@@ -1403,36 +1403,6 @@
     }
   },
   {
-    "type": "constrained_type_parameter",
-    "named": true,
-    "fields": {
-      "bounds": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "trait_bounds",
-            "named": true
-          }
-        ]
-      },
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "lifetime",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "continue_expression",
     "named": true,
     "fields": {},
@@ -2334,76 +2304,6 @@
         "types": [
           {
             "type": "type_arguments",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "higher_ranked_trait_bound",
-    "named": true,
-    "fields": {
-      "type": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "?",
-            "named": false
-          },
-          {
-            "type": "array_type",
-            "named": true
-          },
-          {
-            "type": "closure_type",
-            "named": true
-          },
-          {
-            "type": "function_type",
-            "named": true
-          },
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "map_type",
-            "named": true
-          },
-          {
-            "type": "metavariable",
-            "named": true
-          },
-          {
-            "type": "pointer_type",
-            "named": true
-          },
-          {
-            "type": "primitive_type",
-            "named": true
-          },
-          {
-            "type": "scoped_type_identifier",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          },
-          {
-            "type": "union_type",
-            "named": true
-          }
-        ]
-      },
-      "type_parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_parameters",
             "named": true
           }
         ]
@@ -3505,61 +3405,6 @@
     "fields": {}
   },
   {
-    "type": "removed_trait_bound",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "array_type",
-          "named": true
-        },
-        {
-          "type": "closure_type",
-          "named": true
-        },
-        {
-          "type": "function_type",
-          "named": true
-        },
-        {
-          "type": "generic_type",
-          "named": true
-        },
-        {
-          "type": "map_type",
-          "named": true
-        },
-        {
-          "type": "metavariable",
-          "named": true
-        },
-        {
-          "type": "pointer_type",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
-          "named": true
-        },
-        {
-          "type": "scoped_type_identifier",
-          "named": true
-        },
-        {
-          "type": "type_identifier",
-          "named": true
-        },
-        {
-          "type": "union_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "return_expression",
     "named": true,
     "fields": {},
@@ -3788,6 +3633,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -4226,73 +4072,6 @@
         },
         {
           "type": "token_tree",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "trait_bounds",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "array_type",
-          "named": true
-        },
-        {
-          "type": "closure_type",
-          "named": true
-        },
-        {
-          "type": "function_type",
-          "named": true
-        },
-        {
-          "type": "generic_type",
-          "named": true
-        },
-        {
-          "type": "higher_ranked_trait_bound",
-          "named": true
-        },
-        {
-          "type": "lifetime",
-          "named": true
-        },
-        {
-          "type": "map_type",
-          "named": true
-        },
-        {
-          "type": "metavariable",
-          "named": true
-        },
-        {
-          "type": "pointer_type",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
-          "named": true
-        },
-        {
-          "type": "removed_trait_bound",
-          "named": true
-        },
-        {
-          "type": "scoped_type_identifier",
-          "named": true
-        },
-        {
-          "type": "type_identifier",
-          "named": true
-        },
-        {
-          "type": "union_type",
           "named": true
         }
       ]
@@ -5318,7 +5097,8 @@
   },
   {
     "type": "block_comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "break",
@@ -5430,7 +5210,8 @@
   },
   {
     "type": "line_comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "loop",
